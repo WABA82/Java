@@ -5,7 +5,7 @@ package day1129;
  * 사람의 공통특징은 Person에서 가져다가 사용하고 자신만의 특징을 정의한 클래스<br>
  *
  */
-public class Clark extends Person {
+public final class Clark extends Person {
 	
 	public int power;
 	
@@ -13,6 +13,7 @@ public class Clark extends Person {
 	 * 기본 생성자 : 객체가 생성되면 power가 9로 설정됩니다.
 	 */
 	public Clark() { //기본 생성자
+		super(3,1,1);
 		power = 9;
 	}// 끝
 	

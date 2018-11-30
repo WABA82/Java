@@ -25,7 +25,7 @@ public class UsePerson {
 
 		// person 클래스 메소드 사용
 		superman.setName("클락 캔트"); // person의 메소드
-		System.out.println(superman.getEye() + " / " + superman.getNose() + " / " + superman.getMouth() + " / "
+		System.out.println("눈" + superman.getEye() + " / " + superman.getNose() + " / " + superman.getMouth() + " / "
 				+ superman.getName());
 		System.out.println(superman.eat());
 		System.out.println(superman.eat("스테이크", 10));

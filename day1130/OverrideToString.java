@@ -9,7 +9,8 @@ public class OverrideToString {
 	
 	@Override
 	public String toString() {
-		return "OverrideToString 클래스 입니다.";
+//		toString();
+		return "OverrideToString 클래스 입니다." + super.toString();
 	}//toString method
 	
 }// class

@@ -13,6 +13,7 @@ public class HongGilDong extends Person {
 	 * 홍길동은 싸움을 평민보다 잘하므로 7로 시작
 	 */
 	public HongGilDong() {
+		super();
 		level = 7;
 	}// HongGilDong
 
