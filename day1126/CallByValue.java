@@ -16,7 +16,6 @@ public class CallByValue {
 	}// 인스턴스 메소드 - 가변일,
 
 	public static void main(String[] args) {
-
 		int i = 11, j = 26;
 		System.out.println("swap 전의 i =  " + i + ", j = " + j);
 
