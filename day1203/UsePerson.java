@@ -39,14 +39,14 @@ public class UsePerson {
 
 		stone = "다이아몬드";
 		System.out.println(stone + "을 맞은 결과 " + superman.power(stone) + "힘의 변화 : " + superman.power);
-		
+
 		System.out.println("------------------------------");
 
 		System.out.println(superman.speed("시속 100킬로 "));
 		System.out.println(superman.height("48"));
-		
-		//Clark은 인터페이스를 구현하였으므로 Fly를 사용 할 수 있다.
-		
+
+		// Clark은 인터페이스를 구현하였으므로 Fly를 사용 할 수 있다.
+
 	}
 
 }
