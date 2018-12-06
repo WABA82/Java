@@ -12,45 +12,40 @@ package day1205;
  */
 public class Work {
 
-//	char[] tempPass = new char[8];
-//	String flag = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//
-//	for (int i = 0; i < tempPass.length; i++) {
-//		tempPass[i] = flag.charAt((int) (Math.random() * flag.length()));
-//		System.out.print(tempPass[i]);
-//	}
-//	return tempPass;
-	public int[] totalNum;
-	public int[] lottoNum;
-
-	public Work() {
-		this.totalNum = new int[45];
-		this.lottoNum = new int[6];
-	}
-
 	public int[] lotto() {
 
-		for (int i = 0; i < this.totalNum.length; i++) {
-			this.totalNum[i] = i + 1;
+		int[] lottoNum = new int[6];
+
+//		for (int i = 0; i < lottoNum.length; i++) {
+//
+//			lottoNum[i] = (int) (Math.random() * 45) + 1;
+//			for (int j = i - 1; j >= 0; j--) {
+//				if (lottoNum[i] == lottoNum[j]) {
+//					i--;
+//				}
+//			}
+//		}
+		for (int i = 0; i < lottoNum.length; i++) {
+
+			lottoNum[i] = (int) (Math.random() * 45) + 1;
+			for (int j = 0; j < i-1; j++) {
+				if (lottoNum[i] == lottoNum[j]) {
+					i--;
+				}
+			}
 		}
 
-		for (int i = 0; i < this.lottoNum.length; i++) {
-			this.lottoNum[i] = (int) (Math.random() * totalNum.length);
-			System.out.println(this.lottoNum[i]);
-		}
-
-		
 		return lottoNum;
 	}
 
 	public static void main(String[] args) {
-//		Work wk = new Work();
-		
-		new Work().lotto();
+		Work wk = new Work();
+		int[] lotto = wk.lotto();
 
-//		for (int i = 0; i < wk.lottoNum.length; i++) {
-//			System.out.println(wk.lottoNum[i]);
-//		}
+		for (int i = 0; i < lotto.length; i++) {
+			System.out.println(lotto[i]);
+		}
+
 	}
 
 }
