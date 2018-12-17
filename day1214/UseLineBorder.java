@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 /* JFrame 상속 및 ActionListener 구현 */
+@SuppressWarnings("serial")
 public class UseLineBorder extends JFrame implements ActionListener {
 
 	/* 컴포넌트 선언 */
