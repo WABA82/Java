@@ -114,7 +114,7 @@ public class UseJList extends JFrame implements ActionListener, MouseListener /*
 //
 //	@Override
 //	public void valueChanged(ListSelectionEvent lse) {
-//		// 선택된 아이템(JList)의 값(DefaultListModel)을 얻어와서ㄴ
+//		// 선택된 아이템(JList)의 값(DefaultListModel)을 얻어와서
 //		System.out.println(flag);
 //		if (flag) {
 //			int idx = jl.getSelectedIndex();
