@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
@@ -34,6 +36,9 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 	/* 종료 활성화 */
 	@Override
 	public void windowClosing(WindowEvent e) {
+		if (!taNoteData.equals(javamemo.getTaNote().getText())) {
+			saveMemo();
+		}
 		javamemo.dispose();
 	}
 
@@ -69,6 +74,10 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 		}
 		// 5. 메뉴아이템_"종료" : 이벤트가 발생 했을 때 //
 		if (ae.getSource() == javamemo.getMiEnd()) {
+			// 저장되지 않은 내용이 있다면 저장하고 종료 //
+			if (!taNoteData.equals(javamemo.getTaNote().getText())) {
+				saveMemo();
+			}
 			javamemo.dispose();
 		}
 		// 6. 메뉴아이템_"서식" : 이벤트가 발생 했을 때 //
@@ -149,7 +158,6 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 
 			// 선택한 파일이 존재한다면 //
 			if (filePath != null) {
-				/*** 12-20-2018 코드 추가 ***/
 				// 선택된 파일로 파일객체 생성 //
 				File file = new File(filePath + fileName);
 				BufferedReader br = null;
@@ -173,8 +181,6 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 						br.close();
 					}
 				}
-				/*** 12-20-2018 코드 추가 ***/
-
 				// 파일의 경로와 이름을 Frame의 TitleBar에 설정 //
 				javamemo.setTitle("메모장-열기 " + filePath + fileName);
 			} // end if
@@ -183,7 +189,33 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 
 	/* 작성한 메모를 저장 : 기존의 파일명을 그대로 저장하는 파일명에 반영. */
 	public void saveMemo() {
-		newSaveMemo();
+		try {
+			if (!openPath.equals("")) {
+				createFile(openPath);
+			} else {
+				newSaveMemo();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void createFile(String pathName) throws IOException {
+		BufferedWriter bw = null;
+		try {
+
+			/* 사용자가 디렉토리명을 마음대로 변경할 수 없기 때문에 File클래스를 사용할 필요가 없다. */
+			bw = new BufferedWriter(new FileWriter(pathName));
+			bw.write(javamemo.getTaNote().getText());
+			bw.flush();
+
+			openPath = pathName;
+			taNoteData = javamemo.getTaNote().getText();
+		} finally {
+			if (bw != null) {
+				bw.close();
+			}
+		}
 	}
 
 	/* 파일명을 입력받아 새이름으로 저장하는 일 */
@@ -196,7 +228,13 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 		String filePath = fdSave.getDirectory(); // 선택한 파일의 경로찾는 메소드
 		String fileName = fdSave.getFile(); // 선택한 파일의 이름
 
-		if (filePath != null) {
+		if (filePath != null) { // 저장버튼이 눌렸을 때 동작 //
+			try {
+				createFile(filePath + fileName);
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(javamemo, "저장중 문제 발생", "문제발생", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
 			javamemo.setTitle("메모장-저장 " + filePath + fileName);
 		} // end if
 	}// newSaveMemo 메소드 종료 //
