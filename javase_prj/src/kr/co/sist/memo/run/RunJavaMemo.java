@@ -2,8 +2,10 @@ package kr.co.sist.memo.run;
 
 import java.awt.Font;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import kr.co.sist.memo.view.JavaMemo;
 
@@ -13,19 +15,25 @@ import kr.co.sist.memo.view.JavaMemo;
  */
 public class RunJavaMemo {
 
-	public Font readFontInfo() throws IOException {
-		BufferedReader br = null;
+	public Font readFontInfo() throws IOException, ClassNotFoundException {
+//		BufferedReader br = null;
 		Font font = null;
+		ObjectInputStream ois = null;
 
 		try {
-			br = new BufferedReader(new FileReader("c:/dev/temp/memo.dat"));
-			String readFont = br.readLine();
-			String[] readFontArr = readFont.split(",");
-			font = new Font(readFontArr[0], Integer.parseInt(readFontArr[1]), Integer.parseInt(readFontArr[2]));
+			ois = new ObjectInputStream(new FileInputStream("c:/dev/temp/memo.dat"));
+			font = (Font) ois.readObject();
+//			br = new BufferedReader(new FileReader("c:/dev/temp/memo.dat"));
+//			String readFont = br.readLine();
+//			String[] readFontArr = readFont.split(",");
+//			font = new Font(readFontArr[0], Integer.parseInt(readFontArr[1]), Integer.parseInt(readFontArr[2]));
 		} finally {
-			if (br != null) {
-				br.close();
+			if (ois != null) {
+				ois.close();
 			}
+//			if (br != null) {
+//				br.close();
+//			}
 		}
 
 		return font;
@@ -41,6 +49,8 @@ public class RunJavaMemo {
 		try {
 			font = rjm.readFontInfo();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		new JavaMemo(font);
