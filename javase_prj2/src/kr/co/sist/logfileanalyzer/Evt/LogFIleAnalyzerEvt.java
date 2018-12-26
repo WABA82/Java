@@ -6,13 +6,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import javax.swing.JOptionPane;
@@ -41,6 +46,8 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 	private String lfa_title; // 문서 제목 : 다른 버튼을 시작하기위한 기준 //
 	// 파일 //
 	private File file;
+	private File folder;
+	private String openPath; // 열었던 파일의 경로/이름 저장 //
 	// List //
 	private List<String> tokenlist; // = new ArrayList<>();
 	private ArrayList<String> accessList;
@@ -60,8 +67,10 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 		/* 일반 */
 		lineCnt = 0;
 		lfa_title = lfAnalyzer.getTitle();
+		openPath = "";
 		/* 파일 */
 		file = null;
+		folder = null;
 		/* Arraylist */
 		tokenlist = new ArrayList<>();
 		accessList = new ArrayList<>();
@@ -132,10 +141,14 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 		/* 변수 생성 : 선택파일 이름, 경로 */
 		String slcFileName = openLogFileD.getFile();
 		String slcFilePath = openLogFileD.getDirectory();
+		openPath = slcFileName + slcFilePath;
+		/* 파일열기에서 취소버튼이 눌렸을 경우 : null이 아닐 경우에만 프레임 타이틀 변경 */
+		if (slcFileName != null && slcFilePath != null) {
+			/* 프레임 제목 변경 */
+			lfAnalyzer.setTitle("로그파일분석기 - " + slcFilePath + slcFileName);
+		} // end if //
 		/* File객체 생성 */
 		file = new File(slcFilePath + slcFileName);
-		/* 프레임 제목 변경 */
-		lfAnalyzer.setTitle("로그파일분석기 - " + slcFilePath + slcFileName);
 
 		/* try~finally */
 		BufferedReader bReader = null;
@@ -147,6 +160,10 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 				setTokenList(readlineTemp);
 				lineCnt = lineCnt + 1;
 			} // while
+
+			/* 읽어온 파일의 총 라인 수 */
+			lfAnalyzer.getLabelLineCnt().setText("총 " + lineCnt + " 라인");
+			System.out.println("총 " + lineCnt + " 라인");
 
 			/* 각 리스트에 담는 메소드 */
 			setLists();
@@ -181,7 +198,11 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 					maxValue = Map.get(key);
 				}
 			}
-			System.out.println("1. 최다 사용 키 : " + maxkey + " 횟수 : " + maxValue);
+			/* 1번 라벨에 출력 */
+			lfAnalyzer.getLabel1Key().setText(" 최다 사용 키 : "
+					+ maxkey.substring(maxkey.lastIndexOf("=") + 1, maxkey.length()) + " 횟수 : " + maxValue);
+			System.out.println("1. 최다 사용 키 : " + maxkey.substring(maxkey.lastIndexOf("=") + 1, maxkey.length())
+					+ " 횟수 : " + maxValue);
 			Map.clear();
 
 			/* 2. 브라우저별 접속횟수, 비율 : IE - xx (xx%), Chrome - xx (xx%) */
@@ -202,20 +223,18 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 				} // for j
 				Map.put(browserArr[i], browsercnt);
 			} // for i
-				// 최대값 출력 //
-//			maxValue = 0;
-//			maxkey = "";
+
+			// 최대값 출력 //
+			StringBuilder browserPrint = new StringBuilder();
 			for (String key : Map.keySet()) {
-				System.out.println("2. 접속 브라우저의 종류 및 비율 : " + key + " 횟수 : " + Map.get(key));
-//				if (maxValue < Map.get(key)) {
-//					maxkey = key;
-//					maxValue = Map.get(key);
-//				}
+				browserPrint.append(key).append(" : ").append(Map.get(key)).append("    ");
 			}
+			/* 2번 라벨에 출력 */
+			lfAnalyzer.getLabel2Browser().setText(browserPrint.toString());
+			System.out.println(browserPrint.toString());
 			Map.clear();
 
 			/* 3. 서비스를 성공적으로 수행한 횟수, 실패(404) 횟수 */
-			/* 5. 비정상적인 요청(403)이 발생한 횟수, 비율 구하기 */
 			// Set 셋팅 //
 			for (String access : accessList) {
 				Set.add(access);
@@ -232,19 +251,18 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 						accesscnt = accesscnt + 1;
 					}
 				} // for ~ j
-				Map.put(accessArr[i], accesscnt);
+				if (accessArr[i].equals("200") || accessArr[i].equals("404") || accessArr[i].equals("500")) {
+					Map.put(accessArr[i], accesscnt);
+				}
 			} // for i
 
-			// 최대값 출력 //
-//			maxValue = 0;
-//			maxkey = "";
+			/* 4번 출력 */
+			StringBuilder accessPrint = new StringBuilder();
 			for (String key : Map.keySet()) {
-				System.out.println("최다 사용 키 : " + maxkey + " 횟수 : " + maxValue);
-//				if (maxValue < Map.get(key)) {
-//					maxkey = key;
-//					maxValue = Map.get(key);
-//				}
+				accessPrint.append("접속코드 ").append(key).append(" : ").append(Map.get(key)).append("    ");
+				System.out.println("3. 접속코드 : " + key + " 횟수 : " + Map.get(key));
 			}
+			lfAnalyzer.getLabel3Access().setText(accessPrint.toString());
 			Map.clear();
 
 			/* 4. 요청이 가장 많은 시간 [ 10 시] */
@@ -275,13 +293,42 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 					maxValue = Map.get(key);
 				}
 			}
-			System.out.println("최다 사용 키 : " + maxkey + " 횟수 : " + maxValue);
+
+			// 출력 //
+			lfAnalyzer.getLabel4AskTime().setText("최다 접속시간 : " + maxkey + "시 횟수 : " + maxValue);
+			System.out.println("최다 접속시간 : " + maxkey + "시 횟수 : " + maxValue);
+			Map.clear();
+
+			/* 5. 비정상적인 요청(403)이 발생한 횟수, 비율 구하기 */
+			// Set 셋팅 //
+			for (String access : accessList) {
+				Set.add(access);
+			}
+
+			// Map 셋팅 //
+			accessArr = Set.toArray(new String[Set.size()]);
+			Set.clear();
+			int err403cnt;
+			for (int i = 0; i < accessArr.length; i++) {
+				err403cnt = 0;
+				for (int j = 0; j < accessList.size(); j++) {
+					if (accessArr[i].equals(accessList.get(j))) {
+						err403cnt = err403cnt + 1;
+					}
+				} // for ~ j
+				if (accessArr[i].equals("403")) {
+					Map.put(accessArr[i], err403cnt);
+				}
+			} // for i
+
+			/* 5번 출력 */
+			for (String key : Map.keySet()) {
+				lfAnalyzer.getLabel5Fail403().setText("5. 접속코드 : " + key + " 횟수 : " + Map.get(key));
+				System.out.println("5. 접속코드 : " + key + " 횟수 : " + Map.get(key));
+			}
 			Map.clear();
 
 			/* 6. 입력되는 라인에 해당하는 정보출력 - inputButtonAct에서 처리 */
-
-			/* 읽어온 파일의 총 라인 수 */
-			// System.out.println(lineCnt);
 		} finally {
 			if (bReader != null) {
 				bReader.close();
@@ -293,17 +340,52 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 	public void reportButtonAct() throws IOException {
 		/* 폴더 생성 */
 		createDirectory();
+		/* 파일내용 생성 */
+		StringBuilder writeToFile = new StringBuilder();
+		String save1 = lfAnalyzer.getLabel1Key().getText();
+		String save2 = lfAnalyzer.getLabel2Browser().getText();
+		String save3 = lfAnalyzer.getLabel3Access().getText();
+		String save4 = lfAnalyzer.getLabel4AskTime().getText();
+		String save5 = lfAnalyzer.getLabel5Fail403().getText();
+		String save6 = lfAnalyzer.getLabel6RangeKey().getText();
+
+		/* 저장할 파일의 내용 담기 */
+		writeToFile.append(save1).append("\n").append(save2).append("\n").append(save3).append("\n").append(save4)
+				.append("\n").append(save5).append("\n").append(save6);
+
+		/********************************************************************************************************************************/
 		/* 파일 생성 및 내보내기 */
-//        BufferedWriter bWriter = null;
-//        try {
-//            bWriter = new BufferedWriter(new FileWriter("report_"));
-//            bWriter.write("아직 준비가 안됬습니다.");
-//            bWriter.flush();
-//        } finally {
-//            if (bWriter != null) {
-//                bWriter.close();
-//            }
-//        } // try~finally//
+		// view버튼이 클릭되면 파일다이얼로그 창을 제공 LOG파일을 분석하여 위의 내용(1~6)을 Dialog에 출력<br>
+		// 생성한 후 “report_생성날짜.dat” 파일을 생성하여 1~6까지의
+		SimpleDateFormat formatter = new SimpleDateFormat("yy-mm-dd hh:mm:ss", Locale.KOREA);
+		Date date = new Date(folder.lastModified());
+		String fileDate = formatter.format(date);
+		StringBuilder fileNameSB = new StringBuilder();
+		fileNameSB.append("c:/dev/temp/report/report_").append(fileDate).append(".dat");
+		String saveFileName = fileNameSB.toString();
+		File savefile = new File(saveFileName);
+
+		BufferedWriter bWriter = null;
+		int flag = JOptionPane.showConfirmDialog(lfAnalyzer, "파일을 생성 하시겠습니까??");
+		switch (flag) {
+		case JOptionPane.OK_OPTION:
+			try {
+				bWriter = new BufferedWriter(new FileWriter(savefile));
+				bWriter.write(writeToFile.toString());
+				bWriter.flush();
+			} finally {
+				if (bWriter != null) {
+					bWriter.close();
+				} // end if
+			} // end finally
+			JOptionPane.showMessageDialog(lfAnalyzer, "success");
+			break;
+		case JOptionPane.NO_OPTION:
+			JOptionPane.showMessageDialog(lfAnalyzer, "fail");
+			break;
+		case JOptionPane.CANCEL_OPTION:
+			JOptionPane.showMessageDialog(lfAnalyzer, "Cancel");
+		}// switch case // try~finally//
 	}// reportButtonAct
 
 	/** inputButton동작 메소드 **/
@@ -321,9 +403,11 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 
 				/* 문제풀이 */
 //              6. 입력되는 라인에 해당하는 정보출력(1000~1500번째 라인에 해당하는 정보 중 최다사용 키의 이름과 횟수 | java/ xx회)<br>
+				// Set 세팅 //
 				for (int i = start - 1; i < last; i++) {
 					Set.add(urlList.get(i));
 				}
+				// Map 세팅 //
 				String[] keyArr = Set.toArray(new String[Set.size()]);
 				Set.clear();
 				int keycnt;
@@ -335,10 +419,23 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 						}
 					} // for j //
 					Map.put(keyArr[i], keycnt);
-				} // for i //
+				} // for i
+
+				// 최대값 출력 //
+				int maxValue = 0;
+				String maxkey = "";
 				for (String key : Map.keySet()) {
-					System.out.println("키 : " + key + "횟수" + Map.get(key));
+					if (maxValue < Map.get(key)) {
+						maxkey = key;
+						maxValue = Map.get(key);
+					}
 				}
+				/* 6번 라벨에 출력 */
+				lfAnalyzer.getLabel6RangeKey().setText(" 최다 사용 키 : "
+						+ maxkey.substring(maxkey.lastIndexOf("=") + 1, maxkey.length()) + " 횟수 : " + maxValue);
+				System.out.println("6. 최다 사용 키 : " + maxkey.substring(maxkey.lastIndexOf("=") + 1, maxkey.length())
+						+ " 횟수 : " + maxValue);
+				Map.clear();
 
 			} else if (last < start || last >= lineCnt) {
 				JOptionPane.showMessageDialog(lfAnalyzer, "입력가능 범위를 초과 했습니다.", "오류", JOptionPane.ERROR_MESSAGE);
@@ -395,13 +492,11 @@ public class LogFIleAnalyzerEvt extends WindowAdapter implements ActionListener 
 	}// setList
 
 	//////////////////////////////// 이하 폴더 및 파일 생성 메소드 ///////////////////////////
-//	view버튼이 클릭되면 파일다이얼로그 창을 제공 LOG파일을 분석하여 위의 내용(1~6)을 Dialog에 출력<br>
-//	생성한 후 “report_생성날짜.dat” 파일을 생성하여 1~6까지의
 
 //	report 클릭되면 c:/dev/report 폴더를 생성
 	public void createDirectory() {
-		File file = new File("c:/dev/temp/report");
-		if (file.mkdirs()) {
+		folder = new File("c:/dev/temp/report");
+		if (folder.mkdirs()) {
 			System.out.println("폴더생성성공");
 		} else {
 			System.out.println("같은 이름의 폴더 존재");
