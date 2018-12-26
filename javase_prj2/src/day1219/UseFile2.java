@@ -5,7 +5,7 @@ import java.io.File;
 public class UseFile2 {
 
 	public void createDirectory() {
-		File file = new File("c:/jaehyun/Lee");
+		File file = new File("c:/dev/temp/folder");
 		if (file.mkdirs()) {
 			System.out.println("폴더생성성공");
 		} else {
@@ -27,9 +27,9 @@ public class UseFile2 {
 
 	public static void main(String[] args) {
 		UseFile2 uf2 = new UseFile2();
-//		uf2.createDirectory();
+		uf2.createDirectory();
 		System.out.println("------------------");
-		uf2.removeFile();
+//		uf2.removeFile();
 	}
 
 }

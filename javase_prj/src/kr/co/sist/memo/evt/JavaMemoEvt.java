@@ -169,7 +169,7 @@ public class JavaMemoEvt extends WindowAdapter implements ActionListener {
 					// textArea 초기화 //
 					javamemo.getTaNote().setText("");
 					while ((temp = br.readLine()) != null) {
-						tempTa.append(temp + "\n");
+						tempTa.append(temp+"\n");
 					}
 					// taNoteData 변수에 읽어 들인 내용을 저장 //
 					taNoteData = tempTa.getText();
