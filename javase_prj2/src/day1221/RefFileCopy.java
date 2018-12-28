@@ -20,7 +20,6 @@ public class RefFileCopy extends JFrame implements ActionListener, Runnable {
 	private JButton jb;
 	private JProgressBar jpb;
 	private long fileLen;
-	private int cnt;
 	File file;
 
 	public RefFileCopy() {
@@ -57,7 +56,6 @@ public class RefFileCopy extends JFrame implements ActionListener, Runnable {
 			// 파일과 연결된 스트림에서 값을 얻는다.
 			int temp = 0;
 			fileLen = file.length();
-			cnt = 0;
 			int i = 0;
 			while ((temp = fis.read()) != -1) {
 				fos.write(temp);

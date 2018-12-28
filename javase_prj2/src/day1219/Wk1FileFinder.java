@@ -61,7 +61,7 @@ public class Wk1FileFinder {
 	} // 생성자 종료 //
 
 	public static void main(String[] args) {
-		Wk1FileFinder obj = new Wk1FileFinder();
+		new Wk1FileFinder();
 	}
 
 }
