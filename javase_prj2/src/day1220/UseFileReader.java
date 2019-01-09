@@ -26,14 +26,14 @@ public class UseFileReader {
 			String readline = "";
 			while ((readline = br.readLine()) != null) {
 				System.out.println(readline);
-			}
+			} // end while
 		} finally {
 			if (br != null) {
 				br.close();
 			} // end if //
 		} // finally //
 
-	}
+	}// UseFileReader
 
 	public static void main(String[] args) {
 		try {
@@ -41,6 +41,6 @@ public class UseFileReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}// main
 
-}
+}// class
