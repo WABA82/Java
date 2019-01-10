@@ -230,7 +230,7 @@ public class RunPreparedStatement {
 				e.printStackTrace();
 			} // end catch
 		} // end if
-	}
+	}// searchOneEmp2
 
 	public static void main(String[] args) {
 

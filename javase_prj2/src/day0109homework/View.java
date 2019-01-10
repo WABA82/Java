@@ -2,7 +2,6 @@ package day0109homework;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,11 +24,11 @@ public class View extends JFrame {
 		JLabel tableName, columnName, dataType, dataSize, keyList, keyName;
 
 		tableName = new JLabel("테이블명");
-		jtf_Table = new JTextField();
+		jtf_Table = new JTextField(10);
 		btn_InsertTab = new JButton("테이블추가버튼");
 
 		columnName = new JLabel("컬럼명");
-		jtf_Column = new JTextField();
+		jtf_Column = new JTextField(10);
 		dataType = new JLabel("데이터형");
 		jcb_DataTypes = new JComboBox<>();
 		jcb_DataTypes.addItem("varchar2");
@@ -37,7 +36,7 @@ public class View extends JFrame {
 		jcb_DataTypes.addItem("number");
 		jcb_DataTypes.addItem("date");
 		dataSize = new JLabel("데이터크기");
-		jft_DataSize = new JTextField();
+		jft_DataSize = new JTextField(10);
 
 		keyList = new JLabel("제약사항");
 		jcb_Keys = new JComboBox<>();
@@ -46,7 +45,7 @@ public class View extends JFrame {
 		jcb_Keys.addItem("unique");
 		jcb_Keys.addItem("not null");
 		keyName = new JLabel("제약사항명");
-		jtf_KeyName = new JTextField();
+		jtf_KeyName = new JTextField(10);
 		btn_InsertCol = new JButton("컬럼추가버튼");
 
 		jta_QueryView = new JTextArea();
@@ -60,7 +59,6 @@ public class View extends JFrame {
 		panelTab.add(tableName);
 		panelTab.add(jtf_Table);
 		panelTab.add(btn_InsertTab);
-		panelTab.add(tableName);
 
 		JPanel panelData = new JPanel();
 		panelData.add(columnName);
@@ -75,7 +73,7 @@ public class View extends JFrame {
 		panelKey.add(jcb_Keys);
 		panelKey.add(keyName);
 		panelKey.add(jtf_KeyName);
-		panelData.add(btn_InsertCol);
+		panelKey.add(btn_InsertCol);
 
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new GridLayout(3, 1));
