@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class UseJtableImage extends JFrame implements ActionListener {
 
 	private DefaultTableModel dtm;
