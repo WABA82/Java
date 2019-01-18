@@ -32,7 +32,7 @@ public class UseCalendar {
 		// 요일 : 일-1, 월-2, 화-3, 수-4, 목-5, 금-6, 토-7
 		int day_of_week = cal.get(Calendar.DAY_OF_WEEK);
 
-		String week = "";
+//		String week = "";
 
 //		switch (day_of_week) {
 //		case Calendar.SUNDAY:
@@ -85,13 +85,13 @@ public class UseCalendar {
 		// set 메소드
 		cal1.set(Calendar.YEAR, 2019);
 		cal1.set(Calendar.MONTH, 4); // 4는 5월달을 의미 합니다.
-		cal1.set(Calendar.DAY_OF_MONTH, 15); 
-		
+		cal1.set(Calendar.DAY_OF_MONTH, 15);
+
 		System.out.printf("설정 후 %d-%d-%d %s요일", cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH) + 1,
 				cal1.get(Calendar.DAY_OF_MONTH), "일,월,화,수,목,금,토".split(",")[cal.get(Calendar.DAY_OF_WEEK) - 1]);
-		
+
 		System.out.println("이번달의 마지막날 : " + cal.getActualMaximum(Calendar.DATE));
-		
+
 	}
 
 	public static void main(String[] args) {
