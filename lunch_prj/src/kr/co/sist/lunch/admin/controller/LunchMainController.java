@@ -27,7 +27,7 @@ import kr.co.sist.lunch.admin.vo.LunchDetailVO;
 import kr.co.sist.lunch.admin.vo.LunchVO;
 import kr.co.sist.lunch.admin.vo.OrderVO;
 
-public class LunchMainController extends WindowAdapter implements ActionListener, MouseListener {
+public class LunchMainController extends WindowAdapter implements ActionListener, MouseListener, Runnable {
 
 	private LunchMainView lmv;
 	private LunchAdminDAO la_dao;
@@ -36,6 +36,8 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 	private String orderNum;
 	private String lunchName;
 	private int selectedRow;
+
+	private Thread threadOrdering;
 
 	public LunchMainController(LunchMainView lmv) {
 		this.lmv = lmv;
@@ -243,8 +245,16 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == lmv.getJtb()) {
 			if (lmv.getJtb().getSelectedIndex() == 1) { // 인덱스1번(주문탭) 탭에서 이벤트 발생시
+				// 실시간으로 DB를 조회하여 주문현황을 갱신
+				if (threadOrdering == null) {
+					threadOrdering = new Thread(this);
+
+					threadOrdering.start();
+
+				} // end if
+
 				// 현재까지의 주문사항을 조회
-				searchOrder();
+				// searchOrder();
 			} // end if
 		} // end if
 
@@ -313,6 +323,19 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 			// lmv.getDcbDay().setSelectedItem(new Integer(tdDay)); // 오늘을 선택한다.
 
 	}// setDay
+
+	@Override
+	public void run() {
+		try {
+			while (true) { // 시스템 자원을 과도하게 잡아먹음...30초 마다 한번씩 조회 하도록 하기
+				searchOrder();
+				Thread.sleep(1000 * 30);
+			} // end while
+		} catch (InterruptedException e) {
+			msgCenter(lmv, "주문 조회중 문제 발생!!");
+			e.printStackTrace();
+		} // end catch
+	}// run
 
 	/***************************************/
 	@Override

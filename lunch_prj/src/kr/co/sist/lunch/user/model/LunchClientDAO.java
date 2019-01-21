@@ -1,5 +1,6 @@
 package kr.co.sist.lunch.user.model;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,9 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.co.sist.lunch.admin.model.LunchAdminDAO;
 import kr.co.sist.lunch.user.vo.LunchDetailVO;
 import kr.co.sist.lunch.user.vo.LunchListVO;
 import kr.co.sist.lunch.user.vo.OrderAddVO;
+import kr.co.sist.lunch.user.vo.OrderInfoVO;
+import kr.co.sist.lunch.user.vo.OrderListVO;
+import oracle.jdbc.internal.OracleTypes;
 
 /**
  * 도시락 주문자에 대한 DB처리
@@ -154,12 +159,58 @@ public class LunchClientDAO {
 
 	}// insertOrder
 
-//	public static void main(String[] args) {
-//		try {
-//			System.out.println(LunchClientDAO.getInstance().selectDetailLunch("L_000002"));
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} // end catch
-//	}
+	public List<OrderListVO> selectOrderList(OrderInfoVO oivo) throws SQLException {
+		List<OrderListVO> list = new ArrayList<OrderListVO>();
+
+		Connection con = null;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 1.
+			// 2.
+			con = getConn();
+			// 3.
+			cstmt = con.prepareCall(" { call lunch_order_select(?,?,?)} ");
+			// 4.
+			/* in param */
+			cstmt.setString(1, oivo.getOrderName());
+			cstmt.setString(2, oivo.getOrderTel());
+			/* out param */
+			cstmt.registerOutParameter(3, OracleTypes.CURSOR);
+			// 5. 쿼리실행(프로시져 실행)
+			cstmt.execute();
+			/* out param에 저장된 값 자바의 변수(rs)로 저장 */
+			rs = (ResultSet) cstmt.getObject(3);
+
+			OrderListVO olvo = null;
+
+			while (rs.next()) {
+				olvo = new OrderListVO(rs.getString("lunch_name"), rs.getString("order_date"), rs.getInt("quan"));
+				list.add(olvo);
+			} // end while
+
+		} finally { // 이하 연결 끊기
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (cstmt != null) {
+				cstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+		} // end finally
+
+		return list;
+	}// selectOrderList
+
+	public static void main(String[] args) {
+		try {
+			LunchAdminDAO.getInstance().selectOrderList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}// main
 
 }// class

@@ -204,9 +204,9 @@ public class LunchAdminDAO {
 			String deleteQuery = "DELETE FROM LUNCH WHERE LUNCH_CODE=?";
 			pstmt = con.prepareStatement(deleteQuery);
 			pstmt.setString(1, code);
-			
+
 			int cnt = pstmt.executeUpdate();
-			
+
 			if (cnt == 1) {
 				flag = true;
 			} // end if
@@ -283,6 +283,7 @@ public class LunchAdminDAO {
 			selectCalc.append("     where (o.lunch_code = l.lunch_code)");
 			selectCalc.append(
 					"     and to_char(o.order_date, 'yyyy-mm-dd')=to_char(to_date(?,'yyyy-mm-dd'),'yyyy-mm-dd')");
+			selectCalc.append("     and o.status='Y' ");
 			selectCalc.append("     group by l.lunch_code, l.lunch_name, l.price");
 			selectCalc.append("     order by l.lunch_code ");
 			pstmt = con.prepareStatement(selectCalc.toString());

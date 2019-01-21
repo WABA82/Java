@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import kr.co.sist.lunch.admin.model.LunchAdminDAO;
+import kr.co.sist.lunch.admin.run.LunchAdminMain;
 import kr.co.sist.lunch.admin.view.LunchAddView;
 import kr.co.sist.lunch.admin.vo.LunchAddVO;
 
@@ -79,15 +80,12 @@ public class LunchAddController extends WindowAdapter implements ActionListener 
 			return;
 		} // end if
 		File file = new File(uploadImg);
-
-		System.out.println("12312esdfasdf");
-
 		LunchAddVO lavo = new LunchAddVO(jtfName.getText().trim(), file.getName(), jtaSpec.getText().trim(), price);
 
 		try {
 			LunchAdminDAO.getInstance().insertLunch(lavo);// DB에 추가
-			// 이미지를 사용하는 폴더로 복사(스트림 필요)
-			uploadImg(file);
+			uploadImg(file); // 이미지를 사용하는 폴더로 복사(스트림 필요)
+			LunchAdminMain.lunchImageList.add(file.getName()); // 파일리스트에 새로운 파일명을 추가.
 			// 리스트 갱신
 			lmc.setLunch();
 			// 다음 도시락의 입력을 편하게 하기 위해서 입력 폼 초기화
