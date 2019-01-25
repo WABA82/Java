@@ -328,7 +328,7 @@ public class LunchAdminDAO {
 			selectOrder.append(
 					"    select o.order_num, l.lunch_code, l.lunch_name, o.order_name, o.quan,  l.price * o.quan price, ");
 			selectOrder.append(
-					"       to_char(o.order_date,'yyyy-mm-dd hh:mm:ss') order_date, o.phone, o.ip_address,o.status");
+					"       to_char(o.order_date,'yyyy-mm-dd hh:mm:ss') order_date, o.phone, o.ip_address,o.status, nvl(o.requests,' ') requests");
 			selectOrder.append("    from  lunch l, ordering o");
 			selectOrder.append("    where o.lunch_code = l.lunch_code");
 			selectOrder.append("    and to_char(order_date, 'yyyy-mm-dd') = to_char(sysdate,'yyyy-mm-dd')");
@@ -341,7 +341,8 @@ public class LunchAdminDAO {
 			while (rs.next()) {
 				ovo = new OrderVO(rs.getString("order_Num"), rs.getString("lunch_Code"), rs.getString("lunch_Name"),
 						rs.getString("order_name"), rs.getString("order_date"), rs.getString("phone"),
-						rs.getString("ip_Address"), rs.getString("status"), rs.getInt("quan"), rs.getInt("price"));
+						rs.getString("ip_Address"), rs.getString("status"), rs.getString("requests"), rs.getInt("quan"),
+						rs.getInt("price"));
 				list.add(ovo);
 			} // end while
 		} finally { // 연결끊기

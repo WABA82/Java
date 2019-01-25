@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 import kr.co.sist.lunch.user.controller.LunchOrderDetailController;
 import kr.co.sist.lunch.user.vo.LunchDetailVO;
@@ -21,7 +22,7 @@ public class LunchOrderDetailView extends JDialog {
 
 	private JLabel jlLunchImg;
 	private JTextField jtfLunchName, jtfLunchPrice, jtfOrderName, jtfPhone, jtfTotalPrice;
-	private JTextArea jtaLunchSpec;
+	private JTextArea jtaLunchSpec, jtaRequests;
 	private JButton jbOrder, jbEnd;
 	private JComboBox<Integer> jbQuan;
 
@@ -42,6 +43,11 @@ public class LunchOrderDetailView extends JDialog {
 		jtaLunchSpec.setEditable(false);
 		jtaLunchSpec.setBackground(Color.WHITE);
 		JScrollPane jspTaSpec = new JScrollPane(jtaLunchSpec);
+
+		/**** (이전 기능 : 0121) 기능 추가 : 0122 ***/
+		jtaRequests = new JTextArea();
+		JScrollPane jspTaRequests = new JScrollPane(jtaRequests);
+		jspTaRequests.setBorder(new TitledBorder("요청사항"));
 
 		// DB에서 조회한 값 설정
 		jbOrder = new JButton("주문");
@@ -76,6 +82,8 @@ public class LunchOrderDetailView extends JDialog {
 		jlOrderName.setBounds(270, 180, 80, 25);
 		jlOrderTel.setBounds(270, 210, 80, 25);
 		jlLunchSpec.setBounds(270, 240, 80, 25);
+
+		jspTaRequests.setBounds(10, 290, 244, 95);
 
 		/* 컴포넌트 크기 설정 */
 		jtfLunchName.setBounds(340, 60, 185, 25);
@@ -113,6 +121,8 @@ public class LunchOrderDetailView extends JDialog {
 		add(jtfPhone);
 		add(jlLunchSpec);
 		add(jspTaSpec);
+
+		add(jspTaRequests);
 
 		/* 이벤트 등록 */
 		LunchOrderDetailController lodc = new LunchOrderDetailController(this, ld_vo.getLunchCode());
@@ -155,6 +165,10 @@ public class LunchOrderDetailView extends JDialog {
 
 	public JTextArea getJtaLunchSpec() {
 		return jtaLunchSpec;
+	}
+
+	public JTextArea getJtaRequests() {
+		return jtaRequests;
 	}
 
 	public JButton getJbOrder() {

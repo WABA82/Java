@@ -139,9 +139,7 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 			jp.setVisible(false); // 팝업메뉴 숨김
 		} // end if
 
-		if (e.getSource() == lmv.getJmOrderStatus())
-
-		{
+		if (e.getSource() == lmv.getJmOrderStatus()) {
 			// 제작상태가 'N'인 상태에서만 동작.
 			JTable jt = lmv.getJtOrder();
 			if (((String) jt.getValueAt(selectedRow, 10)).equals("N")) {
@@ -216,7 +214,8 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 			DefaultTableModel dtm = lmv.getDtmOrder();
 			dtm.setRowCount(0);// 초기화
 
-			Vector<Object> vec = null; /* DefaultTableModel dtm 는 vector만 받는다. */
+			Vector<Object> vec = null;
+			/* DefaultTableModel dtm 는 vector만 받는다. */
 			OrderVO ovo = null;
 			for (int i = 0; i < list.size(); i++) {
 				ovo = list.get(i);
@@ -232,6 +231,8 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 				vec.add(ovo.getPhone());
 				vec.add(ovo.getIpAddress());
 				vec.add(ovo.getStatus());
+				vec.add(ovo.getRequests());
+
 				// 테이블 모델에 추가합니다.
 				dtm.addRow(vec);
 			} // end for
@@ -259,6 +260,7 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 		} // end if
 
 		if (e.getSource() == lmv.getJtOrder() && e.getButton() == MouseEvent.BUTTON3) {
+
 			JTable jt = lmv.getJtOrder();
 
 			int r = jt.rowAtPoint(e.getPoint()); // getPoint() : 마우스 포인터가 클릭되면 테이블에서 클릭한 행을 가져오는 일
@@ -277,7 +279,9 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 			orderNum = (String) jt.getValueAt(jt.getSelectedRow(), 1);
 			lunchName = (String) jt.getValueAt(jt.getSelectedRow(), 3) + " "
 					+ (String) jt.getValueAt(jt.getSelectedRow(), 4);
-			System.out.println(jt.getValueAt(jt.getSelectedRow(), 1));
+
+//			System.out.println(jt.getValueAt(jt.getSelectedRow(), 1));
+
 		} else {
 			JPopupMenu jpOrderMenu = lmv.getJpOrderMenu();
 			jpOrderMenu.setVisible(false);
@@ -320,16 +324,20 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 		for (int day = 1; day < lastDay; day++) {
 			lmv.getDcbDay().addElement(day);// 선택된 날의
 		} // end for
-			// lmv.getDcbDay().setSelectedItem(new Integer(tdDay)); // 오늘을 선택한다.
+
+		// lmv.getDcbDay().setSelectedItem(new Integer(tdDay)); // 오늘을 선택한다.
 
 	}// setDay
 
 	@Override
 	public void run() {
+//		while (true) { // 시스템 자원을 과도하게 잡아먹음...30초 마다 한번씩 조회 하도록 하기
+//			searchOrder();
+//		} // end while
 		try {
 			while (true) { // 시스템 자원을 과도하게 잡아먹음...30초 마다 한번씩 조회 하도록 하기
 				searchOrder();
-				Thread.sleep(1000 * 30);
+				Thread.sleep(1000 * 10);
 			} // end while
 		} catch (InterruptedException e) {
 			msgCenter(lmv, "주문 조회중 문제 발생!!");
@@ -355,19 +363,5 @@ public class LunchMainController extends WindowAdapter implements ActionListener
 	public void mouseExited(MouseEvent e) {
 	}
 	/***************************************/
-
-	/* 주문테이블에서 우클릭시 탭 */
-//	JDialog jd = new JDialog(lmv, "작업선택", true);
-//	jd.setResizable(false);
-//	JButton btDelete = new JButton("삭제");
-//	JButton btOrder = new JButton("주문처리");
-//	jd.setLayout(new GridLayout(2, 1));
-//	jd.add(btDelete);
-//	jd.add(btOrder);
-//
-//	jd.setBounds(e.getXOnScreen(), e.getYOnScreen(), 200, 100);
-//	System.out.println("우클릭" + e.getX() + "/" + e.getY());
-//	jd.setVisible(true);
-//	jd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 }// class

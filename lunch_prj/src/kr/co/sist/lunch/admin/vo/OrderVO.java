@@ -2,11 +2,11 @@ package kr.co.sist.lunch.admin.vo;
 
 public class OrderVO {
 
-	private String orderNum, lunchCode, lunchName, orderName, orderDate, phone, ipAddress, status;
+	private String orderNum, lunchCode, lunchName, orderName, orderDate, phone, ipAddress, status, requests;
 	private int quan, price;
 
 	public OrderVO(String orderNum, String lunchCode, String lunchName, String orderName, String orderDate,
-			String phone, String ipAddress, String status, int quan, int price) {
+			String phone, String ipAddress, String status, String requests, int quan, int price) {
 		this.orderNum = orderNum;
 		this.lunchCode = lunchCode;
 		this.lunchName = lunchName;
@@ -15,9 +15,10 @@ public class OrderVO {
 		this.phone = phone;
 		this.ipAddress = ipAddress;
 		this.status = status;
+		this.requests = requests;
 		this.quan = quan;
 		this.price = price;
-	}
+	}// 古鯵持失切
 
 	public String getOrderNum() {
 		return orderNum;
@@ -37,33 +38,38 @@ public class OrderVO {
 
 	public String getOrderDate() {
 		return orderDate;
-	}// getOrderDate
+	}
 
 	public String getPhone() {
 		return phone;
-	}// getPhone
+	}
 
 	public String getIpAddress() {
 		return ipAddress;
-	}// getIpAddress
+	}
 
 	public String getStatus() {
 		return status;
-	}// getStatus
+	}
+
+	public String getRequests() {
+		return requests;
+	}
 
 	public int getQuan() {
 		return quan;
-	}// getQuan
+	}
 
 	public int getPrice() {
 		return price;
-	}// getPrice
+	}
 
 	@Override
 	public String toString() {
 		return "OrderVO [orderNum=" + orderNum + ", lunchCode=" + lunchCode + ", lunchName=" + lunchName
 				+ ", orderName=" + orderName + ", orderDate=" + orderDate + ", phone=" + phone + ", ipAddress="
-				+ ipAddress + ", status=" + status + ", quan=" + quan + ", price=" + price + "]";
-	}// toString
+				+ ipAddress + ", status=" + status + ", requests=" + requests + ", quan=" + quan + ", price=" + price
+				+ "]";
+	}
 
 }// class
