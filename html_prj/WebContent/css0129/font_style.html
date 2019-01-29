@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글꼴 관련 속성</title>
+<style type="text/css">
+	/* 아이디 선택자 사용 */
+	#a {font-family: 휴먼편지체}
+	#b {font-size: 20px;}
+	#c {color: #0000FF;}
+	/* 여러개의 속성을 한번에 적용. */
+	#d {
+			font-family: 나눔고딕, nanumgothic, 휴먼옛체, SansSerif;
+			color: #FF0000;
+			font-size: 25px;
+		}
+		
+	#e {font-weight: bold}
+	#f {text-decoration: underline;}
+	#g {text-decoration: overline;}
+	#h {text-decoration: line-through;}
+	#i {text-decoration: none;}
+	/* 링크가 걸려있는 모든 태그의 글자색-#333, 크기-12px, 글꼴-돋움체
+		밑줄-none
+		마우스 커서를 올리면 밑줄, 글자색은 다른색으로 변경
+	 */
+	 
+	 a {
+		font-family: 돋움체,dotum,돋움,궁서,궁서체,notoSans;
+		color: #333;
+		font-size: 12px;
+		text-decoration: none;
+	}
+	
+	a:hover {
+		text-decoration: underline;
+		color: #0000FF;
+	}
+</style>
+</head>
+
+<body>
+	<div id="a">글꼴 변경</div>
+	<div id="b">크기 변경</div>
+	<div id="c">색 변경</div>
+	<div id="d">글꼴, 색, 크기 한번에 디자인 적용.</div>
+	<div id="e">진하게</div>
+	<div>
+		<span id="f">밑줄</span>
+		<span id="g">윗줄</span>
+		<span id="h">취소선</span>
+		<span id="i">선없음</span>
+	</div>
+	
+	<br>
+	<!-- 링크를 클릭했을 때 이동할 페이지가 없다면 #void, #를 넣는다. -->
+	<a href="#void">링크</a>
+</body>
+</html>

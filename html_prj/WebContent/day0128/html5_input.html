@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML5에서 추가된 폼컨트롤</title>
+</head>
+<body>
+	<div>
+		<strong>의미적 Form Control</strong>
+		<br>
+		<!-- 의미적 폼 컨트롤 : 디자인은 text와 같고 소스보기 시 입력값이 무엇인지 의미적으로 전달하는 객체들. -->
+		<label>이름</label> <input type="text" name="name"><br>
+		<label>이메일</label> <input type="email" name="name"><br>
+		<label>전화번호</label> <input type="tel" name="name"><br>
+		<label>사이트 URL</label> <input type="url" name="name"><br>
+	</div>
+
+	<div>
+		<strong>기능을 가진 HTML Form Control</strong>
+		<br>
+		<!-- value="년-월-일 형식의 값이 입력되면 해당 날짜 정보가 입력되어 보여진다." -->
+		<label>날짜</label><input type="date" name="date" value="2018-02-19">
+		<br>
+		<!-- month value="년-월"형식의 값이 입력되면 해당 날짜정보가 입력되어 보여진다. -->
+		<label>날짜</label><input type="month" name="mon" value="2018-10">
+		<br>
+		<!-- datetime-local value="년-월-일 시:분:초"형식의 값이 입력되면 해당 날짜정보가 입력되어 보여진다. -->
+		<label>날짜</label><input type="datetime-local" name="date">
+		<br>
+		<!-- value = "#RGB" -->
+		<label>색 선택</label><input type="color" name="color" value="#FF0000">
+		<br>
+		<!-- value = "숫자형식" -->
+		<label>숫자</label><input type="number" name="number" value="0">
+		<br>
+		<!-- min/max = "최소/최대값" value="초기값"-->
+		<label>범위</label>0<input type="range" name="ran" min="10" max="90" value="50">100
+		<br>
+	</div>
+
+</body>
+</html>

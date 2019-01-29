@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>태그 숨기기</title>
+<style type="text/css">
+#test { /* 태그 숨김-none, 태그 가시화-inline, block */
+	display: inline;
+}
+
+li {/* 목록의 머릿기호 없애기 */
+	list-style: none;
+}
+
+</style>
+</head>
+<body>
+	<div>
+		<a href="#void">보이기</a>
+	</div>
+	<div id="test">
+		<img alt="김정윤 이미지" src="../common/images/img.png">
+	</div>
+
+	<hr>
+
+	<div>
+		<ul>
+			<li>짜장면</li>
+			<li>뼈다귀 해장국</li>
+			<li>짬뽕</li>
+			<li>칼국수</li>
+			<li>분식</li>
+		</ul>
+
+		<ol type="1">
+			<li>오라클</li>
+			<li>자바SE</li>
+			<li>JDBC</li>
+			<li>HTML</li>
+		</ol>
+	</div>
+</body>
+</html>
