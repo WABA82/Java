@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>align 정렬</title>
+<style type="text/css">
+	table, div {
+		margin: 0px auto;
+	}
+
+	#div_text { 
+		width: 600px;
+		height: 100px;
+		border: 1px solid #333;
+		text-align: right; /* text-align - 문자열 수평정렬 */
+	}
+	
+	#left {
+		text-align: left;
+	}
+	#center {
+		text-align: center;
+	}
+	#right {
+		text-align: right;
+	}
+	
+	#top {
+		vertical-align: top; /* vertical-align - 문자열 수평정렬 */
+	}
+	#middle {
+		vertical-align: middle;
+	}
+	#bottom {
+		vertical-align: bottom
+	}
+</style>
+</head>
+<body>
+	<div id="div_text">
+		<strong>문자열 수평정렬</strong>
+	</div>
+	
+	<table border="1">
+		<tr height="100px">
+			<td id="left" width="80px">왼쪽</td>
+			<td id="center" width="80px">가운데</td>
+			<td id="right" width="80px">오른쪽</td>
+		</tr>
+		<tr height="100px">
+			<td id="top" width="80px">위</td>
+			<td id="middle" width="80px">중간</td>
+			<td id="bottom" width="80px">아래</td>
+		</tr>
+	</table>
+</body>
+</html>
