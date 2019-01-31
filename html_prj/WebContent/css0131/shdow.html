@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS 디자인 틀</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+#wrap {
+	margin: 0px auto; /* 가운데 정렬  */
+	width: 800px;
+	height: 860px;
+	/* background-color: #ff0000; */
+}
+
+#header {
+	width: 800px;
+	height: 140px;
+	background: #e5c3ef url("http://localhost:8080/html_prj/common/images/header_bg.png");
+	position: relative;
+}
+
+#headerTitle {
+	font-family: HY견고딕, 고딕;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	
+	/* 위치 조정 */
+	position: absolute;
+	top: 30px;
+	left: 290px;
+}
+
+#container {
+	width: 800px;
+	height: 600px;
+	background-color: #3cff15;
+}
+
+#footer {
+	width: 800px;
+	height: 120px;
+	background-color: #3ceff8;
+}
+
+#footerTitle{
+	float: right;
+	font-size: 15px;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+.shadow{
+	font-size: 50px;
+	text-shadow: 2px 4px 10px #FF0000;
+}
+
+.boxshadow{
+	border: 1px solid #333;
+	width: 120px;
+	height: 80px;
+	overflow: auto;
+	box-shadow: 0px 0px 10px #FF0000
+}
+
+.radius{
+	border: 1px solid #333; 
+	width: 300px; 
+	height: 100px; 
+	margin-top: 20px;
+	border-radius: 10px  10px  0px  10px;
+}
+
+.radius1{
+	border: 1px solid #333; 
+	width: 200px; 
+	height: 200px; 
+	margin-top: 20px;
+	border-radius: 200px  200px  200px  200px;
+	background-color: #7efce1;
+	box-shadow: 10px 10px 10px #578bbb;
+	
+}
+
+</style>
+</head>
+<body>
+<!-- 
+	작성자 : owner
+	작성일 : 2019. 1. 31.
+	내용 : 
+-->
+<div id="wrap">
+	<div id="header" >
+		<!-- header : 800(w) x 140(h) -->
+		<div id="headerTitle">SIST Class4</div>
+	</div>
+	
+	<div id="container">
+		<!-- container : 800(w) x 600(h) -->
+		오늘은 <span class="shadow">1월  31일</span> 입니다.
+		<div class="boxshadow">
+			공지사항<br>
+			내일은 금요일 입니다.<br>
+			즐거운 설 명절 되시고,<br>
+			2월 7일 목요일에 뵙겠습니다.
+		</div>
+		
+		<div class="radius">
+			이번 주는 SKY캐슬 막방<br>
+			김주영 선생님은 과연 교도소에서 재소자들을 SKY로 보낼 수 있을 것 인가?...<br>
+		</div>		
+		
+		<div class="radius1"></div>
+		
+	</div>
+	
+	<div id="footer">
+		<!-- footer: 800(w) x 120(h) -->
+		<div id="footerTitle">copyright&copy; all right reserved. class 4 </div>
+	</div>
+</div>
+
+</body>
+</html>
+

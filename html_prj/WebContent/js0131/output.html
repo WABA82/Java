@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS 디자인 틀</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+#wrap {
+	margin: 0px auto; /* 가운데 정렬  */
+	width: 800px;
+	height: 860px;
+	/* background-color: #ff0000; */
+}
+
+#header {
+	width: 800px;
+	height: 140px;
+	background: #e5c3ef url("http://localhost:8080/html_prj/common/images/header_bg.png");
+	position: relative;
+}
+
+#headerTitle {
+	font-family: HY견고딕, 고딕;
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	
+	/* 위치 조정 */
+	position: absolute;
+	top: 30px;
+	left: 290px;
+}
+
+#container {
+	width: 800px;
+	height: 600px;
+	background-color: #3cff15;
+}
+
+#footer {
+	width: 800px;
+	height: 120px;
+	background-color: #3ceff8;
+}
+
+#footerTitle{
+	float: right;
+	font-size: 15px;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+</style>
+
+<script type="text/javascript">
+	
+	// HTML<body>태그에 출력하기.
+	window.document.write("안녕 자바 스크립트<br>");
+	
+	//window생략가능.
+	document.write("난 김정윤이라고 해!");
+	
+	//경고창 출력.
+	alert("경고창 출력!!/n");
+	
+	//콘솔 창에 출력.
+	console.log("콘솔에 출력해 보기.");
+	
+</script>
+</head>
+<body>
+<!-- 
+	작성자 : owner
+	작성일 : 2019. 1. 31.
+	내용 : 
+-->
+<div id="wrap">
+	<div id="header" >
+		<!-- header : 800(w) x 140(h) -->
+		<div id="headerTitle">SIST Class4</div>
+	</div>
+	
+	<div id="container">
+		<!-- container : 800(w) x 600(h) -->
+	</div>
+	
+	<div id="footer">
+		<!-- footer: 800(w) x 120(h) -->
+		<div id="footerTitle">copyright&copy; all right reserved. class 4 </div>
+	</div>
+</div>
+
+</body>
+</html>
+
