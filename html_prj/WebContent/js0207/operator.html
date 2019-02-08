@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	/*
+		자바 스크립트의 연산자
+		1. 단항 : 연산에 필요한 항이 한개인 연산자(unary).
+		~(tilde) : 1의 보수연산(0 -> 1, 1 -> 0으로 변경)
+		!(not) : true -> false, false -> true.
+		+ : 형식적 제공.
+		- : 2의 보수 연산자
+	 */
+
+	var num1 = 2;
+	var num2 = -2;
+	var flag1 = true;
+	var flag2 = false;
+	document.write("<ul>");
+	document.write("<li>" + 1 + "</li>");
+	document.write("<li> 할당된 값 : " + num1 + "</li>");
+	// ~양수 : 부호가 변되고 1 증가
+	document.write("<li> ~ :" + num1 + "=" + (~num1) + "</li>");
+	// ~음수 : 부호가 변되고 1 감소
+	document.write("<li> ~ :" + num2 + "=" + (~num2) + "</li>");
+	document.write("<li> ! :" + flag1 + "=" + (!flag1) + "</li>");
+	document.write("<li> ! :" + flag2 + "=" + (!flag2) + "</li>");
+
+	//대입 연산자와 함께 사용되거나, 함수의 인수값으로 넣어줄 때 때에는 전위와 후위가 다른 값을 할당한다.
+	var result = 0;
+	//전위는 내것 먼저. - 연산을 먼저 수행한 후 대입.
+	result = ++num1;
+	document.write("<li>전위 연산후 : result = " + result + ", num1 = " + num1
+			+ "</li>")
+	//후위는 남의 것 먼저. - 대입을 먼저 수행하고 연산.
+	result = 0;
+	num1 = 2;
+	result = num1++;
+	document.write("<li>후위 연산후 : result = " + result + ", num1 = " + num1
+			+ "</li>")
+
+	/* 관계연산 */
+	num1 = "2";
+	num2 = 2;
+	document
+			.write("<li>" + num1 + "==" + num2 + "=" + (num1 == num2) + "</li>")
+	// === : 데이터형과 값이 모두 같아야 트루
+	document.write("<li>" + num1 + "===" + num2 + "=" + (num1 === num2)
+			+ "</li>")
+
+	/* 쉬프트 연산 */
+	// << : 비트를 왼쪽으로 밀고 빈칸을 항상 0으로 채운다.
+	// >> : 비트를 오른쪽으로 밀고 빈칸을 최상위 부호비트에 따라 0 또는 1로 채운다.
+	// >>> : 비트를 오른쪽으로 밀고 빈칸을 항상 0으로 채운다.
+	// 0100 << 2 = 0001 0000
+	document.write("<li>"+num1<<2+"</li>");	
+	// 0100 >> 2 = 0000 0001
+	document.write("<li>"+num1>>2+"</li>");	
+	// 0100 >>> 1 = 0000 0010
+	document.write("<li>"+num1>>>2+"</li>");	
+			
+	/*비트논리 */
+	// & : 상위비트 하위비트를 모두 1인경우만 남고 나머지 0.
+	// ! : 상위비트 하위비트를 모두 0인경우 0내림.
+	// ^ : 상위비트 하위비트를 모두 1인경우 1내림.
+	num1 = 21; //0001 0101
+	num2 = 18; //0001 0010
+	document.write("<li>" + num1 + "&" + num2 + "=" + (num1 & num2)+ "</li>"); // 0001 0101 & 0001 0010 = 0001 0000
+	document.write("<li>" + num1 + "|" + num2 + "=" + (num1 | num2)+ "</li>"); // 0001 0101 | 0001 0010 = 0001 0011
+	document.write("<li>" + num1 + "^" + num2 + "=" + (num1 ^ num2)+ "</li>"); // 0001 0101 ^ 0001 0010 = 0000 0011
+	
+	/* 삼항연산 */
+	num1 = 2;
+	document.write("<li>" + num1 +"은" + (num1%2)==0? "짝수":"홀수" + "</li>");
+
+	/* 대입연산자 */
+	num1 = 3;
+	num1 += 2; // num1 = num1 + 2 = 5;
+	num1 -= 1;
+	num1 *= 1;
+	num1 *= 1;
+	document.write("<li>" + num1 + "</li>");
+	
+	document.write("</ul>");
+	
+	var number = 7;
+	var number1 = 2.7;
+	var flag = true;
+	var msg = "오늘은 목요일 입니다."; //문자열
+	var msg1 = '내일은 금요일 입니다.'; //문자열
+	
+	alert(number + "의 데이터형" + typeof(number));
+	alert(number1 + "의 데이터형" + typeof(number1));
+	alert(flag + "의 데이터형" + typeof(flag));
+	alert(msg + "의 데이터형" + typeof(msg));
+	alert(msg1 + "의 데이터형" + typeof(msg1));
+		
+	window.onload = function() {
+		var obj = document.getElementById("id");
+		alert(obj + "의 데이터형" + typeof (obj));
+	}// function
+
+	//변수를 선언하지 않고 사용한 경우 : undefined.
+	alert("msg2의 데이터형" + typeof (msg2));
+	//숫자가 아닌 값을 연산한 경우 : NaN.
+	alert("msg1 나누기 2 = " + (msg1/2));
+	
+</script>
+</head>
+
+<body>
+	<input type="text" id="id">
+	<!-- 
+	작성자 : owner
+	작성일 : 2019. 2. 7.
+	내용 : 
+-->
+</body>
+</html>

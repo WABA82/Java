@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+#bloodTable {
+	border-spacing: 0px;
+}
+
+td, th {
+	border: 1px solid #333;
+	text-align: center;
+}
+
+#btTitle {
+	width: 100px
+}
+
+#btSpec {
+	width: 180px
+}
+</style>
+<script type="text/javascript">
+	var bloodType = prompt("혈액형을 입력해 주세요.", "");
+
+	var output = "";
+	switch (bloodType.toUpperCase()) {
+	case "A":
+		output = "A형의 특징은 세심하고 치밀하다.";
+		break;
+	case "B":
+		output = "B형의 특징은 털털함.";
+		break;
+	case "AB":
+		output = "AB형의 특징은 복잡함, 합리적이다.";
+		break;
+	case "O":
+		output = "O형의 특징은 리더쉽이 좋음.";
+		break;
+	default:
+		output = "사람의 혈액형이 아닙니다.";
+	}// end switch
+
+	document.write("<table id='bloodTable'>");
+	document.write("<tr>");
+	document.write("<th id='btTitle'>혈액형</th>");
+	document.write("<th id='btSpec'>특징</th>");
+	document.write("</tr>");
+	document.write("<tr>");
+	document.write("<td>" + bloodType + "</td>");
+	document.write("<td>" + output + "</td>");
+	document.write("</tr>");
+	document.write("</table>");
+</script>
+</head>
+<body>
+	<!-- 
+	작성자 : owner
+	작성일 : 2019. 2. 8.
+	내용 : 
+-->
+</body>
+</html>

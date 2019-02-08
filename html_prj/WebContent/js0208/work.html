@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+table {
+	margin:0px auto;
+	border-spacing:0px;	
+}
+
+td {
+	border:1px solid;
+	height: 40px;
+	width: 40px;
+}
+
+</style>
+
+<script type="text/javascript">
+var row = prompt("행의 수", "");
+
+var columns = prompt("열의 수", "");
+	
+var borderColor = prompt("선의 색", "#ff0000");
+
+document.write("<table>");
+for(var i = 0; i < row; i++) {
+	document.write("<tr>");
+	for(var j=0; j<columns; j++) {
+		document.write("<td style=' border-color:"+borderColor+"'></td>")
+	}// end for
+	document.write("</tr>");
+}// end for
+document.write("</table>");
+
+</script>
+
+</head>
+<body>
+
+
+</body>
+</html>
+

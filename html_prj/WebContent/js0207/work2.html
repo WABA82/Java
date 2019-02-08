@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+#wrap {
+	margin: 0px auto;
+	border: 1px solid;
+	width: 302px;
+	height: 182px
+}
+
+img {
+	width: 150px;
+	height: 182px;
+	float: left;
+}
+
+table {
+	width: 152px;
+	float: right;
+}
+
+tr {
+	height: 58px
+}
+</style>
+
+<script type="text/javascript">
+	var language = prompt("언어입력(Java, HTML, JS, CSS)", "JS");
+
+	switch (language) {
+	case "Java":
+		document.write(
+	"<div id='wrap'><img src='../common/images/img.png'><table border='1px'><tr><td>이름</td><td>제임스고슬링</td></tr><tr><td>출생</td><td>1955</td></tr><tr><td>나이</td><td>52살</td></tr></table></div>");
+		break;
+	case "HTML":
+		document.write(
+	"<div id='wrap'><img src='../common/images/img.png'><table border='1px'><tr><td>이름</td><td>팀 버너스 리</td></tr><tr><td>출생</td><td>1955</td></tr><tr><td>나이</td><td>84살</td></tr></table></div>");
+		break;
+	case "JS":
+		document.write(
+	"<div id='wrap'><img src='../common/images/img.png'><table border='1px'><tr><td>이름</td><td>브렌던 아이크</td></tr><tr><td>출생</td><td>1961</td></tr><tr><td>나이</td><td>56살</td></tr></table></div>");
+		break;
+	case "CSS":
+		document.write(
+	"<div id='wrap'><img src='../common/images/img.png'><table border='1px'><tr><td>이름</td><td>하콤 비움 리</td></tr><tr><td>출생</td><td>1954</td></tr><tr><td>나이</td><td>63살</td></tr></table></div>");
+		break;
+	}// end switch
+</script>
+</head>
+<body>
+	<!-- 
+	작성자 : owner
+	작성일 : 2019. 2. 7.
+	내용 : 
+-->
+	<!-- 	<div id="wrap">
+		<img src="../common/images/img.png">
+		<table border="1px">
+			<tr>
+				<td>이름</td>
+				<td>이름</td>
+			</tr>
+			<tr>
+				<td>출생</td>
+				<td>1994</td>
+			</tr>
+			<tr>
+				<td>나이</td>
+				<td>xx살</td>
+			</tr>
+		</table> -->
+	</div>
+</body>
+</html>
