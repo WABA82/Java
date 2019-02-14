@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+
+<script type="text/javascript">
+	function viewCase(flag) {
+		var divNode = document.getElementById("resultDiv1");
+		var output = "";
+		var data = document.frm.input.value;
+
+		if (flag == "lc") {
+			output += "소문자 : " + data.replace(/[A-Z0-9]/g, "")
+		}// end if
+
+		if (flag == "uc") {
+			output += "대문자 : " + data.replace(/[a-z0-9]/g, "")
+		}// end if
+
+		if (flag == "nc") { //
+			output += "숫자 : " + data.replace(/[A-Za-z]/g, "")
+		}// end if
+
+		divNode.innerHTML = output;
+
+	}//viewlowCase
+</script>
+</head>
+
+<body>
+	<form name="frm">
+		<label>문자열입력</label> 
+		<input type="text" name="input" id="input" value="abcy12Ab3456Z" class="inputBox">
+		<input type="button" name="lowerCase" value="소문자" class="btn" onclick="viewCase('lc')">
+		<input type="button" name="upperCase" value="대문자" class="btn" onclick="viewCase('uc')">
+		<input type="button" name="numberCase" value="숫자" class="btn" onclick="viewCase('nc')">
+	</form>
+	<div id="resultDiv1"></div>
+</body>
+</html>

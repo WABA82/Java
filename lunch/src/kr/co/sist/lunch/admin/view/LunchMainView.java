@@ -52,7 +52,7 @@ public class LunchMainView  extends JFrame{
 		};
 		jtLunch=new JTable( dtmLunch ) {
 			@Override
-			public Class<?>getColumnClass(int column) {
+			public Class<?> getColumnClass(int column) {
 				return getValueAt(0, column).getClass();
 			}//getColumnClass
 		};

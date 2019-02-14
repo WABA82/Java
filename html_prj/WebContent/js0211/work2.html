@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+
+<script type="text/javascript">
+	window.onload = function() {
+		//이벤트 등록
+		document.getElementById("frm").addEventListener("click", getValue);
+	}// onload-function
+
+	function getValue() {
+		var obj = document.frm;
+		var gugudan = obj.gugudan.value;
+
+		var output = "";
+
+		if (gugudan > 1 && gugudan < 10) {
+			//태그 가져오기.
+			var tableNode = document.getElementById("table");
+			//출력내용생성.
+			for (var i = 1; i < 10; i++) {
+				output = output + "<tr><td onclick='getResult(" + i + "," + gugudan + ")'>" + gugudan + " X " + i + "</td></tr>";
+			}// end for
+			//출력
+			tableNode.innerHTML = output;
+		} else {
+			var divNode = document.getElementById("div");
+			output = "<marquee> 구구단은 2~9사이입니다. </marquee>"
+			//출력
+			divNode.innerHTML = output;
+		}// end else
+	}// getValue
+
+	function getResult(i, gugudan) {
+		alert(i * gugudan)
+	}// getResult
+</script>
+
+</head>
+
+
+
+<body>
+	<form name="frm">
+		<label>구구단</label>
+		<input type="text" name="gugudan" class="inputBox">
+		<input type="button" value="버튼" class="btn" id="frm">
+	</form>
+		
+		<table border="1" id="table">
+		</table>
+		<div id="div">
+		</div>
+</body>
+</html>

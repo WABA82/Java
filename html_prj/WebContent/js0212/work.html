@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+#diceWrap {
+	border: 1px solid #333;
+	width: 500px;
+	height: 400px;
+	box-shadow: 10px 10px 10px #333;
+	margin-left: 100px;
+	margin-top: 10px;
+}
+
+#inputHeader {
+	height: 150px;
+}
+
+#score {
+	text-align: center;
+	height: 30px;
+}
+
+#diceView {
+	margin-top: 50px;
+	width: 500px;
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+</style>
+<script type="text/javascript">
+	throwflag = false;
+	player1 = "";
+	player2 = "";
+	throwClickCnt = 0;
+	p1Score = 0;
+	p2Score = 0;
+
+	window.onload = function() {
+		setDice();
+		document.getElementById("start").addEventListener("click", validateUser)
+		document.getElementById("startGame").addEventListener("click",throwDice)
+	}// function
+
+
+
+	// 주사위 던지기 버튼 시.
+	function throwDice() {
+		var obj = document.frm;
+
+		if (throwClickCnt == 6) {
+			setResult();
+			return;
+		}// end if
+
+		if (throwflag) {
+			if (obj.turn1[(throwClickCnt % 2 == 0) ? 0 : 1].checked) {
+				var num1 = parseInt(Math.random() * 6) + 1;
+				var num2 = parseInt(Math.random() * 6) + 1;
+				obj.dice1.src = "img/dice_" + num1 + ".png";
+				obj.dice2.src = "img/dice_" + num2 + ".png";
+				if (throwClickCnt % 2 == 0) {
+					p1Score += (num1 + num2);
+				} else {
+					p2Score += (num1 + num2);
+				}// end else
+				throwClickCnt++;
+			} else {
+				alert((throwClickCnt % 2 == 0) ? "1번 참여자의 순서입니다."
+						: "2번 참여자의 순서입니다.");
+			}// end else;
+
+		} else {
+			alert("먼저 참여설정을 해주세요.")
+		}// end else
+	}// throwDice
+
+	// 게임이 끝났을 때 판정 결과 보여주기.
+	function setResult() {
+		var obj = document.frm;
+
+		var output = "";
+
+		if (p1Score > p2Score) {
+			output = player1 + "님이 승리하셨습니다.";
+		} else if (p1Score < p2Score) {
+			output = player2 + "님이 승리하셨습니다.";
+		} else {
+			output = "무승부....";
+		}// end else if
+
+		document.getElementById("result").innerHTML = output;
+	}// setResult
+
+	// 브라우저가 열리면 주사위 랜덤으로 셋팅하기.
+	function setDice() {
+		var obj = document.frm;
+		var num1 = parseInt(Math.random() * 6) + 1;
+		var num2 = parseInt(Math.random() * 6) + 1;
+		obj.dice1.src = "img/dice_" + num1 + ".png";
+		obj.dice2.src = "img/dice_" + num2 + ".png";
+	}// setDice
+
+	//사용자가 입력 되었는지 검증하기.
+	function validateUser() {
+		var obj = document.frm;
+		player1 = obj.player1.value;
+		player2 = obj.player2.value;
+
+		if (player1) { // true:값이 있을 때.
+			if (player2) {
+				setName(player1, player2);
+			} else {
+				alert("사용자2을 입력해 주세요.");
+			}// end else
+		} else {
+			alert("사용자1을 입력해 주세요.");
+		}// end else
+
+	}// validateUser
+
+	//입력된 사용자 이름을 라디오 옆에 출력하는 메소드	
+	function setName(player1, player2) {
+		//alert("setName");
+		var obj = document.frm;
+
+		document.getElementById("p1Name").innerHTML = player1;
+		document.getElementById("p2Name").innerHTML = player2;
+
+		obj.turn1[0].checked = true;
+		throwflag = true;
+	}// setName
+</script>
+</head>
+
+
+<body>
+	<!-- 
+		1. 참여설정이 클릭되면 사용자 1과2의 공백 체크한 후 값이 있다면 alert("사용자를 입력해 주세요.");
+		2. id가 있으면 p1Name, p2Name span태그에 입력됨.
+		3. 게이머의 라디오 버튼이 체크된후 던지기 버튼을 누르면 주사위변경. 2개의 주사위 값을 더한 값을 저장.
+		4. 초기화 버튼 만들고 구현.
+		규칙 : 
+		게임은 3회
+		시작은 1번 사용자 부터 시작.
+		한 사람이 연속으로 주사위를 던 질 수 없다.
+		게임이 종료 되면 '판정에 XXX님이 승리하셨습니다.'띄우기
+	 -->
+	<div id="diceWrap">
+		<form name="frm">
+			<div id="inputHeader">
+				<h2>주사위 게임</h2>
+				<div>
+					<label>사용자1</label> <input type="text" name="player1"
+						class="inputBox"> <label>사용자2</label> <input type="text"
+						name="player2" class="inputBox"> <input type="button"
+						value="참여설정" id="start" class="btn">
+				</div>
+				<div style="text-align: center; margin-top: 10px">
+					<input type="radio" name="turn1"><span id="p1Name"></span>
+					<input type="radio" name="turn1"><span id="p2Name"></span>
+					<input type="button" value="던지기" id="startGame" class="btn">
+				</div>
+			</div>
+
+			<div id="score">
+				판정 : <span id="result"></span>
+			</div>
+
+			<div id="diceView">
+				<img src="img/dice_1.png" name="dice1"> <img
+					src="img/dice_1.png" name="dice2">
+			</div>
+
+		</form>
+	</div>
+</body>
+</html>

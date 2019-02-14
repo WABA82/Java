@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+
+</style>
+
+<script type="text/javascript">
+	window.onload = function() {
+		//이벤트 등록
+		document.getElementById("frm").addEventListener("click", getValue);
+	}// onload-function
+
+
+	function getValue() {
+		//폼 태그의 이름 속성을 사용하여 값 설정.
+		var name = document.frm.name.value;
+		var addr = document.frm.addr.value;
+		var age = document.frm.age.value;
+		alert("이름 : " + name + "\n주소 : " + addr + "\n나이 : " + age);
+
+		// 1.form 태그 얻기.
+		var obj = document.frm;
+		// 2.form 태그의 하위 컨트롤 값 얻기.
+		var name = obj.name.value;
+		var addr = obj.addr.value;
+		var age = obj.age.value;
+		
+		// 값 가져오기.
+		var divNode = document.getElementById("output");
+		//출력내용생성.
+		var output = "이름 : <strong>"+name+"</strong><br>나이 : " + age + "<br>주소 : " + addr;
+		//출력
+		divNode.innerHTML=output;
+	}// getValue
+
+	function idGetValue() {
+		//form를 거치지 않고 id 속서으로 태그를 찾아서 값 얻기.
+		var name = document.getElementById("name").value;
+		var addr = document.getElementById("addr").value;
+		var age = document.getElementById("age").value;
+
+		alert("이름 : " + name + "\n주소 : " + addr + "\n나이 : " + age);
+	}// idGetValue
+</script>
+
+</head>
+
+
+
+
+<body>
+	<form name="frm">
+		<label>이름</label> 
+		<input type="text" name="name" id="name" class="inputBox"/><br>
+		<label>주소</label> 
+		<input type="text" name="addr" id="addr" class="inputBox"/><br>
+		<label>나이</label> 
+		<input type="password" name="age" id="age" class="inputBox"/><br>
+
+		<input type="button" value="form로 값얻기" class="btn" id="frm"><br>
+		<input type="button" value="id로 값얻기" class="btn" id="id" onclick="idGetValue()"><br>
+		<input type="button" value="onclick로 값얻기" class="btn" onclick="getValue()"><br>
+	</form>
+		<div id="output">
+		</div>
+</body>
+
+</html>

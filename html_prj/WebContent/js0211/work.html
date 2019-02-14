@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+
+<script type="text/javascript">
+	window.onload = function() {
+		//이벤트 등록
+		document.frm.addEventListener("click", getValue);
+	}// onload-function
+
+	function getValue() {
+		// 1.form 태그 얻기.
+		var obj = document.frm;
+		// 2.form 태그의 하위 컨트롤 값 얻기.
+		var name = obj.name.value;
+
+		// 값 가져오기.
+		var divNode = document.getElementById("output");
+		//출력내용생성.
+		var output = "";
+		for (var i = 1; i < 7; i++) {
+			output = output + ("<h" + i.toString() + ">" + name + "</h" + i.toString() + ">");
+		}// end for
+		divNode.innerHTML = output;
+
+		//출력
+	}// getValue
+</script>
+</head>
+
+<body>
+
+	<form name="frm">
+		<label>이름</label> <input type="text" name="name" id="name"class="inputBox" /> 
+		<input type="button" value="확인" class="btn" id="frm"><br>
+	</form>
+
+	<div id="output">
+		<!-- 값이 출력되는 div -->
+
+	</div>
+
+</body>
+</html>

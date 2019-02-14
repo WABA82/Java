@@ -28,7 +28,7 @@ public class LunchDetailView extends JDialog{
 	private JButton jbImg, jbUpdate, jbDelete, jbEnd;
 	
 	
-	public LunchDetailView( LunchMainView lmv,LunchDetailVO ldvo, LunchMainController lmc) {
+	public LunchDetailView( LunchMainView lmv, LunchDetailVO ldvo, LunchMainController lmc) {
 		super(lmv,"도시락 상세 정보",true); //모달
 		//DB에서 조회한 결과를 Component에서 채운다. 
 		
