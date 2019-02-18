@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- mata : HTML 내 charset을 설정하는데 사용. -->
+<meta charset="UTF-8">
+<!-- mata : 검색엔진에 사이트의 설명을 제공 -->
+<meta name="description" content="국비지원 무료교육, JAVA, DB, Spring 등 IT교육 전문기관.">
+<!-- mata : 일정시간 이후 페이지 이동해야 할 때 -->
+<meta http-equiv="refresh" content="5;http://sist.co.kr">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	window.onload=function() {
+		// pageMove();
+	}// 이벤트 등록
+	
+	var cnt = 0;
+	
+	function pagemove() {
+		cnt++;
+		
+		if(cnt == 5) {
+			location.href="http://sist.co.kr";
+		}// end if
+		
+		setTimeout(pagemove(), 1000)
+	}// pagemove
+</script>
+</head>
+<body>
+접속하신 http://test.com은 2019년 2월 15일 부터 http://sist.co.kr로 도메인이 변경 됩니다.<br>
+5초 후에 사이트를 이동합니다.<br>
+바로 이동하시려면 <a href="http://sist.co.kr">여기</a>를 눌러주세요.
+</body>
+</html>

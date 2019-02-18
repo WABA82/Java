@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+
+<script type="text/javascript">
+	function regexp() {
+		var data = "abcㄱdef123가acg나다ABC~~?$%zzz햏";
+		var output = "가장 처음 등장하는 문자 1개 삭제 <strong>" + data.replace("a", "")
+				+ "</strong><br>"
+
+		output += "모든 문자 대소구분 하고 삭제 <strong>" + data.replace(/a/g, "")
+				+ "</strong><br>";
+
+		output += "모든 문자 대소구분 없이 삭제 <strong>" + data.replace(/a/g, "")
+				+ "</strong><br>";
+
+		output += "범위  삭제 <strong>" + data.replace(/[a-z]/g, "")
+				+ "</strong><br>";
+
+		output += "범위 대문자 삭제 <strong>" + data.replace(/[A-Z]/g, "")
+				+ "</strong><br>";
+		output += "범위 숫자 삭제 <strong>" + data.replace(/[0-9]/g, "")
+				+ "</strong><br>";
+		output += "범위 숫자 삭제 <strong>" + data.replace(/[ㄱ-힣]/g, "")
+				+ "</strong><br>";
+		document.getElementById("output").innerHTML = output;
+	}//regexp
+
+	function chk() {
+		var obj = document.frm;
+
+		var txt1 = obj.txt1.value;
+		//대소문자만 입력했는지 체크
+		if (txt1.replace(/[a-zA-Z]/g, "") != "") {
+			alert("영문자만 입력 가능합니다.");
+		}// end if
+
+		var txt2 = obj.txt2.value;
+		//숫자만 입력가능.
+		if (txt2.replace(/[0-9]/g, "") != "") {
+			alert("숫자만 입력 가능합니다.");
+		}// end if
+
+		var txt3 = obj.txt3.value;
+		//숫자만 입력가능.
+		if (txt3.replace(/[!@#$%^&*()_+=-{}\[\];:]/ig, "") != "") {
+			alert("특수문자만 입력 가능합니다.");
+		}// end if
+
+	}//chk
+</script>
+</head>
+
+<body>
+	<input type="button" value="클릭" class="btn" onclick="regexp()">
+	<label> 원본 : <strong>abcㄱdef123가acg나다ABC~~?$%zzz햏</strong>
+	</label>
+	<br>
+	<form name="frm">
+		<label>대문자와 소문자만 입력가능</label>
+		<input type="text" name="txt1" class="inputBox"> <input type="text" name="txt2"
+			class="inputBox"> <input type="text" name="txt3"
+			class="inputBox"> <input type="button" value="클릭" class="btn"
+			onclick="chk()">
+	</form>
+	<div id="output"></div>
+</body>
+</html>
