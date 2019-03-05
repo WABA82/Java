@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById("class1").addEventListener("click", useClass1);
+		document.getElementById("class2").addEventListener("click", useClass2);
+		document.getElementById("class3").addEventListener("click",
+				useInheritance);
+	}// window.onload 
+
+	function useClass1() {
+		//기본 생성자를 사용하는 클래스
+		function DataVO() { // 1.클래스 선언
+			var name;
+
+			function setName(i_name) {
+				name = i_name;
+			}// setName
+
+			function getName() {
+				return name;
+			}// getName
+
+			return {
+				setName : setName,
+				getName : getName
+			}
+		}// 클래스
+
+		// 클래스는 함수와 다르게 객체를 생성하여 사용.
+		var vo = new DataVO();
+		vo.setName("김정윤");
+		alert(vo.getName());
+	}// useClass1()
+
+	function useClass2() {
+
+		//매개변수 생성자를 사용하는 클래스
+		function DataVO(i_name) { //1. 클래스 선언
+			var name = i_name;
+
+			function setName(i_name) {
+				name = i_name;
+			}// setName
+
+			function getName() {
+				return name;
+			}// setName
+
+			return {
+				setName : setName,
+				getName : getName
+			}
+		}// 클래스
+
+		// 2. 객체생성
+		var vo1 = new DataVO("김정윤");
+		var vo2 = new DataVO("김정운");
+
+		alert(vo1.getName())
+
+		//vo2.setName("백인제")
+		alert(vo2.getName())
+
+	}// useClass2()
+
+	function useInheritance() {
+
+		// 1. 수퍼클래스 만들기
+		function Parent() {
+			var name;
+
+			function printName() {
+				// 상속관계에서 클래스에 변수를 사용할 때에는 this.을 붙여서 객체에 생성된 변수임을 명시해줘야 합니다.
+				alert("수퍼 : " + this.name);
+			}// printName()
+
+			return {
+				name : name,
+				printName : printName
+			};
+		}// 클래스
+
+		// 2. 서브클래스 생성
+		function Child() {
+		}// 클래스
+
+		// 3. 상속처리
+		Child.prototype = new Parent();
+
+		// 4. 자식클래스에 변수, 함수 등록
+		Child.prototype.age;
+		//함수를 등록할 때에는 무기명함수식으로 등록한다.
+		Child.prototype.printAge = function() {
+			//등록된 변수는 클래스안으로 등록 되므로 this를 사용하여 접근.
+			alert(this.age);
+		}// printAge
+		
+		Child.prototype.birthYear = function(age) {
+			var date = new Date();
+			var birthYear = date.getFullYear() - age + 1;
+			
+			//등록된 변수는 클래스안으로 등록 되므로 this를 사용하여 접근.
+			alert(birthYear + "년 생 입니다.");
+		}// printAge
+
+		//	5. 사용.
+		var c_obj = new Child();
+		c_obj.name = "김정윤";
+		c_obj.printName();
+
+		// 서브클래스에 등록한 자원 사용하기.
+		c_obj.age = 20;
+		alert(c_obj.age);
+		c_obj.printAge;
+		c_obj.birthYear(27);
+		
+		$
+	}// useInheritance()
+</script>
+</head>
+<body>
+	<input type="button" value="클래스1" id="class1" class="btn">
+	<input type="button" value="클래스2" id="class2" class="btn">
+	<input type="button" value="상속(prototype)" id="class3" class="btn">
+</body>
+</html>

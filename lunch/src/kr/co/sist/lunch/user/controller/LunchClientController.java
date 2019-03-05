@@ -240,13 +240,15 @@ public class LunchClientController extends WindowAdapter implements ActionListen
 			dis=new DataInputStream(socket.getInputStream());
 			//서버가 보내오는 파일 갯수 저장
 			int fileCnt=dis.readInt(); 
-			 System.out.println("클라이언트 "+ fileCnt+"개 받음");
-			String fileName="";
-			int fileSize=0; 
-			int fileLen=0;
+			
+			System.out.println("클라이언트 "+ fileCnt+"개 받음");
+			
+			String fileName=""; // 서버에서 보내오는 파일명.
+			int fileSize=0;  // 서버에서 보내오는 파일 조각의 갯수.
+			int fileLen=0; // 서버에서 보내오는 파일의 길이를 저장하기 위한 변수.
 			
 			FileOutputStream fos=null;
-			for( int i= 0 ; i < fileCnt ; i++) {
+			for( int i= 0 ; i < fileCnt ; i++) { // 서버가 보내오는 파일의 갯수 만큼 저장.
 				
 				//전달받을 파일 조각의 갯수
 				fileSize=dis.readInt();

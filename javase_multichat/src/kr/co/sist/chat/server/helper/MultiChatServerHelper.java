@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
  * @author owner
  */
 public class MultiChatServerHelper extends Thread {
+	
 	private Socket someClient;
 	private DataInputStream readStream;
 	private DataOutputStream writeStream;
@@ -35,8 +36,7 @@ public class MultiChatServerHelper extends Thread {
 	 * @param dlm    접속자 관리창을 사용하기 위한 Model 객체
 	 * @param cnt    접속 순서
 	 */
-	public MultiChatServerHelper(Socket socket, DefaultListModel<String> dlm, int cnt, JFrame jf,
-			List<MultiChatServerHelper> list, JScrollPane jsp) {
+	public MultiChatServerHelper(Socket socket, DefaultListModel<String> dlm, int cnt, JFrame jf, List<MultiChatServerHelper> list, JScrollPane jsp) {
 		someClient = socket;
 		this.dlm = dlm;
 		this.cnt = cnt;
@@ -74,10 +74,10 @@ public class MultiChatServerHelper extends Thread {
 				// 서버에서 보내오는 모든 메시지를 읽어서, 모든 접속자에게 뿌린다.
 				while (true) {
 					revMsg = readStream.readUTF();
-
 					broadcast(revMsg);
 				} // end while
 			} catch (IOException ioe) {
+
 				// 접속자가 퇴실하면 해당 접속자를 리스트에서 삭제한다.
 				connectList.remove(this);
 
@@ -93,7 +93,7 @@ public class MultiChatServerHelper extends Thread {
 	} // run
 
 	/**
-	 * 모든 접속자에게 메시지를 뿌려주는 일 synchronized : Multi Thread에서 동시에 호출할 수 없다. (동기화 처리)
+	 * 모든 접속자에게 메시지를 뿌려주는 일 synchronized : 멀티Thread에서 동시에 호출할 수 없다. (동기화 처리)
 	 * 
 	 * @param msg
 	 */
@@ -112,3 +112,4 @@ public class MultiChatServerHelper extends Thread {
 	} // broadcast
 
 } // class
+

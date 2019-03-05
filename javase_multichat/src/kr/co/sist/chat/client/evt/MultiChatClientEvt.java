@@ -79,6 +79,10 @@ public class MultiChatClientEvt extends WindowAdapter implements ActionListener,
 		} // end if
 	} // sendMsg
 
+	/**
+	 * 대화 내용을 로컬에 저장하는 메서드.
+	 * @throws IOException
+	 */
 	private void capture() throws IOException {
 		switch (JOptionPane.showConfirmDialog(mccv, "대화 내용을 저장하시겠습니까?")) {
 		case JOptionPane.OK_OPTION:
@@ -147,7 +151,8 @@ public class MultiChatClientEvt extends WindowAdapter implements ActionListener,
 		if (ae.getSource() == mccv.getJbtOthersList()) {
 			/*** 여기하기 ***/
 		}
-
+		
+		/* 대화창에서 엔터 눌렀을 때 */
 		if (ae.getSource() == mccv.getJtfTalk()) {
 			try {
 				sendMsg();
@@ -182,6 +187,12 @@ public class MultiChatClientEvt extends WindowAdapter implements ActionListener,
 		} // end if
 	} // run
 
+	/**
+	 * 서버에 접속하는 메서드.
+	 * 
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 	public void connectToServer() throws UnknownHostException, IOException {
 		if (client == null) {
 			nick = mccv.getJtfNick().getText().trim();
@@ -194,7 +205,7 @@ public class MultiChatClientEvt extends WindowAdapter implements ActionListener,
 
 			String serverIp = mccv.getJtfServerIp().getText().trim();
 
-			client = new Socket(serverIp, mccv.getSlctPort()); // 입력한 ip address의 컴퓨터에 연결
+			client = new Socket(serverIp, mccv.getSlctPort()); // 입력한 IP address의 컴퓨터에 연결
 
 			// 스트림
 			readStream = new DataInputStream(client.getInputStream());

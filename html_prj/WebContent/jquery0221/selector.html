@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+<!-- CDN을 사용하여 jQuery를 다운로드 받아 사용 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		/* // 아이디 셀렉터
+		$("#a").css("background-color", "#FF0000");
+		// 클래스 셀렉터
+		$(".b").css("background-color", "#FF0000");
+		// 태그 셀렉터 : 싱글
+		$("div").css("background-color", "#FF0000");
+		// 태그 셀렉터 : 멀티플
+		$("div, span, a").css("background-color", "#FF0000");
+		*/
+		// 서브 태그 셀렉터 : 상위 > 하위
+		//$("div > p > span").css("background-color", "#FF0000");
+		// 가장 처음 나오는 태그만 : 태그명:first
+		/* $("li:first").css("background-color", "#FF0000");
+		// 가장 마지막 나오는 태그만 : 태그명:last
+		$("li:last").css("background-color", "#FF0000");
+		// 홀수 번째 태그만 : 태그명:odd
+		$("li:odd").css("background-color", "#FF0000");
+		// 홀수 번째 태그만 : 태그명:even
+		$("li:even").css("background-color", "#FF0000");
+		// 특정 인덱스 번째 태그만 : 태그명:eq(인덱스)
+		$("li:eq(2)").css("background-color", "#FF0000");
+		// 속성 선택자(attribute selector) : [속성명 = '값']
+		$("[value='이름']").css("background-color", "#FF0000");
+		$("a[target='b']").css("background-color", "#FF0000"); */
+		
+		// p의 class가 c인 태그에만 적용 : 태그명.class명
+		// 클래스중 특정 태그에만 적용 : 태그명.class명
+		$("p.c").css("background-color", "#FF0000");	
+		
+		// 테이블의 1,4,9번 의 배경색 채우기
+		$("td:eq(0)").css("background-color", "#FF0000");
+		$("td:eq(3)").css("background-color", "#FF0000");
+		$("td:last").css("background-color", "#FF0000");
+	});
+</script>
+</head>
+<body>
+	<strong>제이쿼리 selector의 사용</strong>
+	<div id="a">id가 a인 DIV태그</div>
+	<p class="b">처음 P태그</p>
+	<p class="c">클래스가 C인 두번째 P태그</p>
+	<div class="c">클래스가 C인 DIV</div>
+	<div class="b">
+		<p>디브 안의 P태그<span> DIV &gt; P &gt; SPAN</span></p>
+	</div>
+	<span>SPAN</span>
+	<p>세번째 P태그</p>
+	<ol>
+		<li>사과</li>
+		<li>포도</li>
+		<li>딸기</li>
+	</ol>
+	<ul>
+		<li>서울</li>
+		<li>경기</li>
+		<li>충청</li>
+		<li>경상</li>
+		<li>전라</li>
+		<li>제주</li>
+	</ul>
+	
+	<a href="#void" target="a">링크 1</a><br>
+	<a href="#void" target="b">링크 2</a><br>
+	<a href="#void" target="c">링크 3</a><br>
+
+	<input type="text" name="name" value="이름" id="name" class="name">
+
+	<table border="1">
+	
+	<tr>
+		<td width="50">1</td>
+		<td width="50">2</td>
+		<td width="50">3</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>5</td>
+		<td>6</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>8</td>
+		<td>9</td>
+	</tr>
+	</table>
+
+</body>
+</html>

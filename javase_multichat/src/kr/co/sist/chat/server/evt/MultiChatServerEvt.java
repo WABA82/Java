@@ -26,11 +26,11 @@ public class MultiChatServerEvt extends WindowAdapter implements ActionListener,
 	public MultiChatServerEvt(MultiChatServerView mcsv) {
 		this.mcsv = mcsv;
 		listClient = new ArrayList<MultiChatServerHelper>();
-
-	} // MultiChatServerEvt
+	} // 생성자.
 
 	@Override
 	public void windowClosing(WindowEvent we) {
+		// 종료 처리.
 		mcsv.dispose();
 	} // windowClosing
 
@@ -57,6 +57,7 @@ public class MultiChatServerEvt extends WindowAdapter implements ActionListener,
 
 			Socket someClient = null; // 접속자 소켓을 저장할 객체
 			InetAddress ia = null; // 접속자의 ip address를 얻기 위한 객체
+			
 			// 접속자 소켓을 받아 스트림을 연결하고, 대화를 읽거나 모든 접속자에게 전송하는 일
 			MultiChatServerHelper mcsh = null;
 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="http://localhost:8080/html_prj/common/css/main_v20190130.css">
+<style type="text/css">
+</style>
+<!-- CDN을 사용하여 jQuery를 다운로드 받아 사용 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#btn").click(function() {
+			alert("버튼이 클릭되었습니다.");
+		});
+
+		$("#focus_in").focusin(function() {
+			alert("커서가 들어왔서요.");
+		});
+
+		$("#focus_out").focusout(function() {
+			alert("커서가 나갔어요.");
+		});
+
+		//아무키나 눌렸을 때.
+		/* $("#key_down").keydown(function() {
+			alert("키가 눌렸습니다.");
+		}); */
+
+		//이벤트 발생 함수는 매개변수를 정의하면 event객체가 값으로 들어온다.
+		$("#key_down").keydown(function(evt) {
+			// window.event.which 키코드 값을 얻는 코드;
+			//alert("키가 눌렸습니다." + window.event.which);
+			if (evt.which == 13) {
+				alert("엔터 키가 눌렸습니다." + evt.which);
+			}// end if
+		});
+
+		//키보드 키를 눌렀다가 땠을 때 이벤트 발생
+		$("#key_up").keyup(function() {
+			alert("키가 올라올 때");
+		});
+
+		//다른 옵션이 선택되었을 때.
+		$("#change").change(function() {
+			alert("다른 옵션 선택시 이벤트가 발생합니다.");
+		});
+
+		// 마우스 포인터가 들어왔을 때. .mouseenter를 사용해도 같은 동작을 함
+		$("#m_in").mouseover(function() {
+			alert("마우스 포인터가 들어왔을 때");
+		});
+
+		// 마우스 포인터가 나갔을 때.
+		$("#m_out").mouseout(function() {
+			alert("마우스 포인터가 나갔을 때");
+		});
+
+		// 마우스 포인터가 움직일 때.
+		$("#m_move").mousemove(function(evt) {
+			//alert("마우스 포인터가 움직였을 때");
+			$("#output").html("마우스의 좌표 X - " + evt.pageX + ", y - " + evt.pageY); // = document.getElementById()
+		});
+
+	});// ready
+</script>
+</head>
+<body>
+	<strong>이벤트 발생과 처리</strong>
+	<input type="button" value="클릭" id="btn">
+	<br>
+	<input type="text" value="커서가 들어올 때" id="focus_in">
+	<br>
+	<input type="text" value="커서가 나갈 때" id="focus_out">
+	<br>
+	<input type="text" value="키가 눌릴때" id="key_down">
+	<br>
+	<input type="text" value="키가 올라올때" id="key_up">
+	<br>
+	<select id="change">
+		<option>DBMS-Oracle</option>
+		<option>Java SE</option>
+		<option>HTML</option>
+		<option>JavaScript</option>
+		<option>CSS</option>
+	</select>
+	<br>
+	<strong>포인터가 올라왔을 때</strong>
+	<img src="../common/images/img.png" width="100" id="m_in">
+	<br>
+	<strong>포인터가 나갔을 때</strong>
+	<img src="../common/images/img.png" width="100" id="m_out">
+	<br>
+	<strong>포인터가 움직일 때</strong>
+	<img src="../common/images/img.png" width="100" id="m_move">
+	<br>
+	<div id="output"></div>
+</body>
+</html>

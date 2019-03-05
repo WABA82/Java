@@ -1,14 +1,12 @@
 {
   "ecmaVersion": 5,
+  "libs": [
+    "browser",
+    "jquery"
+  ],
   "plugins": {
-    "outline": {
-      
-    },
     "cordovajs": {
       
     }
-  },
-  "libs": [
-    "browser"
-  ]
+  }
 }
