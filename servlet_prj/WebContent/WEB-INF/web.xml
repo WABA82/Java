@@ -275,4 +275,24 @@
     <servlet-name>select_emp</servlet-name>
     <url-pattern>/select_emp</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>web_member_join</display-name>
+    <servlet-name>web_member_join</servlet-name>
+    <servlet-class>kr.co.sist.user.WebMemberJoin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>web_member_join</servlet-name>
+    <url-pattern>/web_member_join</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>id_dup</display-name>
+    <servlet-name>id_dup</servlet-name>
+    <servlet-class>kr.co.sist.user.IdDuplication</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>id_dup</servlet-name>
+    <url-pattern>/id_dup</url-pattern>
+  </servlet-mapping>
 </web-app>
