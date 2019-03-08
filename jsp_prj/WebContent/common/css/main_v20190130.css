@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+body, div, ul, ol, li, code, form, select, fieldset, legend, textarea, p,
+	th, td, input, button {
+	margin: 0px;
+	padding: 0px
+}
+
+fieldset, img {
+	border: 0px
+}
+
+ul, ol, li {
+	list-style: none
+}
+/* line-height: 행간 , 설정한 글자크기의 배수로 설정 된다. */
+body, th, td, input, select, textarea, button {
+	font-size: 13px;
+	line-height: 1.5;
+	font-family: AppleSDGothicNeo-Regular, 'Malgun Gothic', '맑은 고딕', dotum,
+		'돋움', sans-serif;
+	color: #222;
+	letter-spacing: -1px
+}
+
+a {
+	color: #3F3F3F;
+	text-decoration: none
+}
+
+a:hover {
+	color: #118eff;
+	text-decoration: underline
+}
+
+.inputBox {
+	border: 1px solid #ededed;
+	background-color: #ffffff;
+	height: 20px
+}
+
+.btn {
+	border: 1px solid #ededed;
+	background-color: #ffffff;
+	color: #1c1c1c;
+	padding: 4px;
+	height: 20px;
+	cursor: pointer;
+}
