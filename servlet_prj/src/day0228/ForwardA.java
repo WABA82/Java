@@ -1,7 +1,6 @@
 package day0228;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,6 @@ public class ForwardA extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//데이터 처리 코드에 집중
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out =response.getWriter();
 		
 		//처리된 데이터
 		String[] nameArr= {"노진경","박영민","김정윤","최지우","김희철","박소영","이지수"}; 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class ForwardB extends HttpServlet {
 
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out= response.getWriter();
@@ -66,7 +67,7 @@ public class ForwardB extends HttpServlet {
 	      
 	      //데이터처리 페이지에서 처리한 결과를 받아와서
 	      String[] nameArr= (String[])request.getAttribute("member");
-	      List<String> prjList=(List<String>)request.getAttribute("project_list");
+	      List<String> prjList=(List<String>) request.getAttribute("project_list");
 	      
 	      //출력부분을 만든다.
 	      out.println("<label>프로젝트 선택</lable>");

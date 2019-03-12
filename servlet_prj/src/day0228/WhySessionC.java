@@ -40,7 +40,7 @@ public class WhySessionC extends HttpServlet {
 	      
 	      //WhySessionC 서블릿에서는 이전페이지인 WhySessionB 서블릿 내의 값을 
 	      //사용할 수 없다.(이전페이지에서 사용한 이름을 이동한 페이지에서 사용할 수 없다)
-	      String name=request.getParameter("name");
+	      String name = request.getParameter("name");
 	      
 	      
 	      out.write("\t\r\n");
