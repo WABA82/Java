@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="외부 jsp의 페이지 지시자"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,17 +57,37 @@
 		<div id="header">
 			<div id="headerTitle">SIST Class4</div>
 		</div>
+
 		<div id="container">
+			<!-- 객체생성 -->
+			<jsp:useBean id="t_vo" class="day0313.TestVO" scope="page" />
+
+			<!-- setter 호출 : set을 제외한 메소드명을 소문자로 작성 -->
+			<jsp:setProperty property="firstName" name="t_vo" value="노진경" />
+			<jsp:setProperty property="age" name="t_vo" value="20" />
+
+			<!-- getter 호출 : get을 제외한 메소드명을 소문자로 작성. Expression을 사용하지 않아도 화면 출력이 된다.-->
+			이름 :
+			<jsp:getProperty property="firstName" name="t_vo" /><br>
+			나이 :
+			<jsp:getProperty property="age" name="t_vo" /><br>
+
 			<%
-				String name = "노진경";
+				//<jsp:useBean>으로 생성된 객체는 자바코드로 접근하여 사용할 수 있다.
+				//setter 호출
+				t_vo.setFirstName("정윤");
+				t_vo.setAge(30);
 			%>
-			<strong>외부JSP</strong>
-			<!-- 변수나 메서드의 공유가 되지 않는다 : 각각의 클래스로 생성되고 JVM에서 각각의 인스턴스가 생성되므로 다른 인스턴스 내에 변수는 사용할 수 없다. -->
-			<jsp:include page="include_action_b.jsp" />
-			<strong>외부JSP</strong>
-			<%=name%><br>
-			<%-- <%= msg %> --%>
+
+			<!-- gettter호출 -->
+			<div>
+				재설정 이름 : <%=t_vo.getFirstName()%><br>
+				재설정 나이 : <%=t_vo.getAge()%><br>
+			</div>
+
+
 		</div>
+
 		<div id="footer">
 			<div id="footerTitle">copyright&copy; all right reserved. class 4</div>
 		</div>

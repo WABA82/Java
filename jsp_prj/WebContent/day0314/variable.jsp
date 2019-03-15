@@ -1,4 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="외부 jsp의 페이지 지시자"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="EL에서 제공하는 변수관련 태그 사용."%>
+
+<!-- JSTL을 사용하려면 지시자 선언을 해야한다. -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,17 +62,36 @@
 		<div id="header">
 			<div id="headerTitle">SIST Class4</div>
 		</div>
+
 		<div id="container">
 			<%
-				String name = "노진경";
+				int month = 3;
+				pageContext.setAttribute("month", month);
 			%>
-			<strong>외부JSP</strong>
-			<!-- 변수나 메서드의 공유가 되지 않는다 : 각각의 클래스로 생성되고 JVM에서 각각의 인스턴스가 생성되므로 다른 인스턴스 내에 변수는 사용할 수 없다. -->
-			<jsp:include page="include_action_b.jsp" />
-			<strong>외부JSP</strong>
-			<%=name%><br>
-			<%-- <%= msg %> --%>
+			<!-- 변수의 선언 -->
+			<c:set var="i" value="14" />
+			<c:set var="mon" value="<%=month%>" />
+			<c:set var="name" value="김희철" />
+
+			<!-- 출력 - 취약점을 보완하기 위해  c:out안에 EL을 사용한다.-->
+			i = <c:out value="${ i+1 }" />
+			<br>
+			<strong><c:out value="${ name }" /></strong>
+			pageScope 사용 : <c:out value="${ month }" /> ( <c:out value="${ pageScope.month }" /> )
+			<br>
+			&lt;c:set&gt;사용 : <c:out value="${ mon }" />
+			<!-- 변수의 삭제 : 삭제된 변수는 아무것도 출력되지 않는다. -->
+			<c:remove var="i"/>
+			<c:remove var="name"/>
+			<br>
+			변수 삭제후 출력<br>
+			i = <c:out value="${ i }"/>
+			<br>
+			name = <c:out value="${ name }"/>
+			<br>
+			mon = <c:out value="${ mon }"/>
 		</div>
+
 		<div id="footer">
 			<div id="footerTitle">copyright&copy; all right reserved. class 4</div>
 		</div>

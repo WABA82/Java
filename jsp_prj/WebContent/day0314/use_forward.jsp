@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="외부 jsp의 페이지 지시자"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,17 +57,23 @@
 		<div id="header">
 			<div id="headerTitle">SIST Class4</div>
 		</div>
+
 		<div id="container">
+			이름 : ${ name }
+			<br>
+			취미 :
+			<%-- ${ hobby } : 배열의 경우는 주소값이 출력된다. --%>
+			<br>
 			<%
-				String name = "노진경";
+				String[] hobby = (String[]) request.getAttribute("hobby");
+
+				for (int i = 0; i < hobby.length; i++) {
+					out.print(hobby[i]);
+					out.println(" ");
+				} // end for
 			%>
-			<strong>외부JSP</strong>
-			<!-- 변수나 메서드의 공유가 되지 않는다 : 각각의 클래스로 생성되고 JVM에서 각각의 인스턴스가 생성되므로 다른 인스턴스 내에 변수는 사용할 수 없다. -->
-			<jsp:include page="include_action_b.jsp" />
-			<strong>외부JSP</strong>
-			<%=name%><br>
-			<%-- <%= msg %> --%>
 		</div>
+
 		<div id="footer">
 			<div id="footerTitle">copyright&copy; all right reserved. class 4</div>
 		</div>

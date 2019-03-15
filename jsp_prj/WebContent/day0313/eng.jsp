@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="외부 jsp의 페이지 지시자"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,17 +57,46 @@
 		<div id="header">
 			<div id="headerTitle">SIST Class4</div>
 		</div>
+
 		<div id="container">
 			<%
-				String name = "노진경";
+				//HTML Form Controll에서 입력된 값.
+				String name = request.getParameter("name");
+				String age = request.getParameter("age");
+				String addr = request.getParameter("address");
+
+				//<jsp:param>으로 생성된 값.
+				String lang = request.getParameter("lang");
+				String date = request.getParameter("date");
 			%>
-			<strong>외부JSP</strong>
-			<!-- 변수나 메서드의 공유가 되지 않는다 : 각각의 클래스로 생성되고 JVM에서 각각의 인스턴스가 생성되므로 다른 인스턴스 내에 변수는 사용할 수 없다. -->
-			<jsp:include page="include_action_b.jsp" />
-			<strong>외부JSP</strong>
-			<%=name%><br>
-			<%-- <%= msg %> --%>
+			<strong>Hello? This is English page</strong>
+			<br>
+			<strong>Values are under contents</strong>
+			<br>
+			<ul>
+				<li>Name : <strong><%=name%></strong></li>
+				<li>Age : <strong><%=age%></strong></li>
+				<li>Address : <strong><%=addr%></strong></li>
+				<li>Language : <strong><%=lang%></strong></li>
+				<li>Access Time : <strong><%=date%></strong></li>
+				<li>Locations : <select>
+						<%
+							String[] loc = (String[]) request.getAttribute("loc");
+
+							for (int i = 0; i < loc.length; i++) {
+						%>
+						<option value="<%=loc[i]%>"><%=loc[i]%></option>
+						<%
+							} // end for
+						%>
+					</select>
+				</li>
+			</ul>
+			<br>
+			<a href="forward_a.jsp">입력폼으로 이동</a>
+
 		</div>
+
 		<div id="footer">
 			<div id="footerTitle">copyright&copy; all right reserved. class 4</div>
 		</div>

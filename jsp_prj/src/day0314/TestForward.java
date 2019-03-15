@@ -1,0 +1,26 @@
+package day0314;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@SuppressWarnings("serial")
+public class TestForward extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = "이재찬";
+		String[] hobby = { "집에 가기", "점심 먹기", "낮잠 자기" };
+
+		request.setAttribute("name", name);  
+		request.setAttribute("hobby", hobby);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("day0314/use_forward.jsp");
+		
+		rd.forward(request, response);
+	}// doGet
+
+}// class

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="외부 jsp의 페이지 지시자"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="forTokens의 사용."%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,17 +58,19 @@
 		<div id="header">
 			<div id="headerTitle">SIST Class4</div>
 		</div>
+
 		<div id="container">
 			<%
-				String name = "노진경";
+				String csvData = "Java SE,Java EE,DBMS.Oracle,HTML5,JavaScript,CSS,jQuery";
+				pageContext.setAttribute("csv", csvData);
 			%>
-			<strong>외부JSP</strong>
-			<!-- 변수나 메서드의 공유가 되지 않는다 : 각각의 클래스로 생성되고 JVM에서 각각의 인스턴스가 생성되므로 다른 인스턴스 내에 변수는 사용할 수 없다. -->
-			<jsp:include page="include_action_b.jsp" />
-			<strong>외부JSP</strong>
-			<%=name%><br>
-			<%-- <%= msg %> --%>
+			<ul>
+				<c:forTokens var="data" items="${ csv }" delims=",">
+					<li><c:out value="${ data }" /></li>
+				</c:forTokens>
+			</ul>
 		</div>
+
 		<div id="footer">
 			<div id="footerTitle">copyright&copy; all right reserved. class 4</div>
 		</div>
