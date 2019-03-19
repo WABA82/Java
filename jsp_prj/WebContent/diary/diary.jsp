@@ -111,11 +111,23 @@
 	text-align: right;
 }
 
+.todayTd {
+	width: 100px;
+	height: 60px;
+	border: 1px solid #d7e2e9;
+	background-color: #e9f4fb;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: top;
+	text-align: right;
+}
+
 .blankTd {
 	width: 100px;
 	height: 60px;
 	border: 1px solid #cccccc;
-	color:gray;
+	color: gray;
 	font-size: 14px;
 	font-weight: bold;
 	text-align: right;
@@ -247,6 +259,9 @@
 					//4. 1일 이전에 이전 달의 마지막 일자부터 출력.
 					
 					Calendar cal = Calendar.getInstance();
+					StringBuilder todate = new StringBuilder();
+					todate.append(cal.get(Calendar.YEAR)).append(cal.get(Calendar.MONTH)+1).append(cal.get(Calendar.DAY_OF_MONTH));
+				
 					int nowYear = 0;
 					int nowMonth = 0;
 					int nowDay = cal.get(Calendar.DAY_OF_MONTH);
@@ -266,27 +281,28 @@
 					nowMonth = cal.get(Calendar.MONTH) + 1;
 					nowYear = cal.get(Calendar.YEAR);
 					
+					boolean toDayFlag = false;
+					
+					StringBuilder nowDate = new StringBuilder();
+					nowDate.append(nowYear).append(nowMonth).append(nowDay);
+					
+					if(todate.toString().equals(nowDate.toString())) {
+						toDayFlag=true;
+					}// end if
+					System.out.println("----------------------"+ toDayFlag);
 					pageContext.setAttribute("nowYear", nowYear);
 					pageContext.setAttribute("nowMonth", nowMonth);
 					pageContext.setAttribute("nowDay", nowDay);
 				%>
-				
+
 				<form action="diary.jsp" name="diaryFrm" method="post">
-					<input type="hidden" name="param_month"/>
-					<input type="hidden" name="param_year"/>
+					<input type="hidden" name="param_month" /> <input type="hidden" name="param_year" />
 				</form>
 
 				<div id="diaryTitle">
-					<a href="#void" onclick="moveMonth(${ nowMonth-1 == 0 ? 12:nowMonth-1 }, ${ nowMonth-1 == 0 ? nowYear-1 : nowYear })">
-						<img alt="" src="images/btn_prev.png" title="이전 월" />
-					</a>
-					
+					<a href="#void" onclick="moveMonth(${ nowMonth-1 == 0 ? 12:nowMonth-1 }, ${ nowMonth-1 == 0 ? nowYear-1 : nowYear })"> <img alt="" src="images/btn_prev.png" title="이전 월" /></a> 
 					<span id="diaryToday" title="${ nowYear }년 ${ nowMonth }월"> <c:out value="${ nowYear }.${ nowMonth }" /></span>
-					
-					<a href="#void" onclick="moveMonth(${ nowMonth+1 == 13 ? 1 : nowMonth+1  },${ nowMonth+1 == 13 ? nowYear+1 : nowYear })">
-						<img alt="" src="images/btn_next.png" title="다음 월" />
-					</a>
-					
+					<a href="#void" onclick="moveMonth(${ nowMonth+1 == 13 ? 1 : nowMonth+1  },${ nowMonth+1 == 13 ? nowYear+1 : nowYear })"> <img alt="" src="images/btn_next.png" title="다음 월" /></a>
 					<a href="#void" onclick="moveMonth('','')"><img alt="" src="images/btn_today.png" title="오늘" /></a>
 				</div>
 
@@ -304,32 +320,27 @@
 						<tr>
 
 							<%
-								String dayClass = "";
-							
+								String dayClass = ""; // 요일별 색
+								String toDayClass = ""; // 오늘 또는 평일의 TD색
+								
 								//set을 안했기 때문에 오늘의 날짜가 찍힘.
 								System.out.println(cal.get(Calendar.DAY_OF_MONTH));
 							
-								int toDay = cal.get(Calendar.DAY_OF_MONTH);
-								
 								//매월 마다 끝나는 날짜가 다르기 때문에
 								for (int tempDay = 1; tempDay < 33; tempDay++) {
 									cal.set(Calendar.DAY_OF_MONTH, tempDay);
 
-									System.out.println("--set이후에 어떻게 cal이 바뀌는지 확인.--" + cal.get(Calendar.DAY_OF_MONTH));
-
-									switch() {
-									case toDay : 
-										
-									}// end switch
-
-									//설정된 날짜가 현재 일자가 아니라면 마지막일자 다음달이 1일 이므로 반복문을 빠져나간다.
-									if (cal.get(Calendar.DAY_OF_MONTH) != tempDay) {
+									//System.out.println("--set이후에 어떻게 cal이 바뀌는지 확인.--" + cal.get(Calendar.DAY_OF_MONTH));
 									
-										
-										if(cal.get(Calendar.DAY_OF_WEEK) != 1) {
-										int nextDay = 1;
-										for (int blankTd = cal.get(Calendar.DAY_OF_WEEK); blankTd < 8; blankTd++) {
-											out.println("<td class='blankTd'>" + (cal.get(Calendar.MONTH)+1) + "/" + (nextDay++) +"</td>");
+									int nextMonth = cal.get(Calendar.MONTH)+1;
+									int nextDay = 1; //다음달의 한 주 찍기.
+									int week = cal.get(Calendar.DAY_OF_WEEK);
+
+									//설정된 날짜가 현재 일자가 아니라면 마지막일자 다음달이 1일 이므로 공백을 출력한 후 반복문을 빠져나간다.
+									if (cal.get(Calendar.DAY_OF_MONTH) != tempDay) {
+										if(week != Calendar.SUNDAY) { // 마지막일이 일요일이 아니면 출력.
+										for (int blankTd = week; blankTd < 8; blankTd++) {
+											out.println("<td class='blankTd'>" + nextMonth + "/" + (nextDay++) +"</td>");
 										}// end if
 								} // end for
 
@@ -339,8 +350,16 @@
 									//1일을 출력하기 전에 공백 출력.
 									switch (tempDay) {
 									case START_DAY:
+										//전달의 마지막날
+										cal.set(Calendar.MONTH, nowMonth-2);
+										int preMonth = cal.get(Calendar.MONTH)+1;//이전 달.
+										int preLastDay = cal.getActualMaximum(Calendar.DATE); //이전달의 마지막일.
+										cal.set(Calendar.MONTH, nowMonth-1); //다시 현재월로 변경.
+										
+										System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+										int start = cal.get(Calendar.DAY_OF_WEEK);
 										for (int blankTd = 1; blankTd < cal.get(Calendar.DAY_OF_WEEK); blankTd++) {
-											out.println("<td class='blankTd'></td>");
+											out.println("<td class='blankTd'>"+ preMonth +"/"+ (preLastDay-start+blankTd+1) +"</td>");
 										} // end for
 									}// end switch
 
@@ -355,8 +374,17 @@
 									default:
 										dayClass = "weekColor";
 									}// end switch
+									
+									toDayClass = "diaryTd"; // 평일의 CSS설정.
+									
+									if(toDayFlag) {// 요청한 년월일과 오늘의 년월일이 같을 때.
+										if(nowDay == tempDay) { // 오늘 일자에만 다른 CSS를 적용.
+											toDayClass = "todayTd";
+										}// end if
+									}// end if
+									
 							%>
-							<td class="diaryTd">
+							<td class="<%= toDayClass %>">
 								<div>
 									<span class="<%=dayClass%>"><%=tempDay%></span>
 								</div>
