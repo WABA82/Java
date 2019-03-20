@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -85,7 +86,11 @@
 				<tr>
 					<td><%=i + 1%></td>
 					<td>
-						<a href="download.jsp?file_name=<%=temp.getName()%>"> 
+						<!-- 
+							IE에서는 한글파일명을 link로 전송할 때에는 인코딩 처리를 해주어야 값이 올바르게 전송된다.
+							단, <form>으로 한글을 넘길 때에는 브라우저에서 인코딩을 처리해 주기 때문에 개발자가 따로 처리하지 않아도 된다.
+						-->
+						<a href="download.jsp?file_name=<%=URLEncoder.encode(temp.getName(), "UTF-8")%>">
 							<%=temp.getName()%>
 						</a>
 					</td>
