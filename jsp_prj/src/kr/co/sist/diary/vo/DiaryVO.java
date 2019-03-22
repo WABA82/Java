@@ -54,6 +54,42 @@ public class DiaryVO {
 
 	/* getter */
 
+	/* setter */
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+
+	public void setE_year(String e_year) {
+		this.e_year = e_year;
+	}
+
+	public void setE_month(String e_month) {
+		this.e_month = e_month;
+	}
+
+	public void setE_day(String e_day) {
+		this.e_day = e_day;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	/* setter */
+
 	@Override
 	public String toString() {
 		return "DiaryVO [writer=" + writer + ", subject=" + subject + ", contents=" + contents + ", e_year=" + e_year + ", e_month=" + e_month + ", e_day=" + e_day + ", pass=" + pass + ", ip=" + ip + "]";

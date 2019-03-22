@@ -31,6 +31,22 @@ public class DiaryUpdateVO {
 
 	/* getter */
 
+	/* setter */
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	/* setter */
+
 	@Override
 	public String toString() {
 		return "DiaryUpdateVO [num=" + num + ", contents=" + contents + ", pass=" + pass + "]";

@@ -3,6 +3,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -56,11 +57,15 @@
 	padding-right: 20px;
 }
 </style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 <body>
 	<div id="wrap">
 		<div id="header">
 			<div id="headerTitle">SIST Class4</div>
+			<div style="padding-top: 100px;">
+				<c:import url="../common/jsp/main_menu.jsp" />
+			</div>
 		</div>
 
 		<div id="container">
@@ -90,8 +95,7 @@
 							IE에서는 한글파일명을 link로 전송할 때에는 인코딩 처리를 해주어야 값이 올바르게 전송된다.
 							단, <form>으로 한글을 넘길 때에는 브라우저에서 인코딩을 처리해 주기 때문에 개발자가 따로 처리하지 않아도 된다.
 						-->
-						<a href="download.jsp?file_name=<%=URLEncoder.encode(temp.getName(), "UTF-8")%>">
-							<%=temp.getName()%>
+						<a href="download.jsp?file_name=<%=URLEncoder.encode(temp.getName(), "UTF-8")%>"> <%=temp.getName()%>
 						</a>
 					</td>
 					<td><%=sdf.format(new Date(temp.lastModified()))%></td>

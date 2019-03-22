@@ -24,6 +24,16 @@ public class DiaryRemoveVO {
 	}
 	/* getter */
 
+	/* setter */
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	/* setter */
+
 	@Override
 	public String toString() {
 		return "DiaryRemoveVO [num=" + num + ", pass=" + pass + "]";
