@@ -48,7 +48,37 @@ public class DiaryListVO {
 		return w_date;
 	}
 
-	/* gettter */
+	/* getter */
+
+	/* getter */
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public void setE_year(String e_year) {
+		this.e_year = e_year;
+	}
+
+	public void setE_month(String e_month) {
+		this.e_month = e_month;
+	}
+
+	public void setE_day(String e_day) {
+		this.e_day = e_day;
+	}
+
+	public void setW_date(String w_date) {
+		this.w_date = w_date;
+	}
 
 	@Override
 	public String toString() {

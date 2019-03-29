@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE depts SYSTEM "dept.dtd">
+<!-- 부서정보를 저장하는 XML -->
+<depts>
+	<dept>
+		<deptno>10</deptno>
+		<dname>SI 개발부</dname>
+		<loc>서울</loc>
+	</dept>
+	<dept>
+		<deptno>20</deptno>
+		<dname>SM 유지보수</dname>
+		<loc>경기</loc>
+	</dept>
+	<dept>
+		<deptno>30</deptno>
+		<dname>SE</dname>
+		<loc>서울</loc>
+	</dept>
+	<dept>
+		<deptno>40</deptno>
+		<dname>QA</dname>
+		<loc>부산</loc>
+	</dept>
+
+	<!-- 정상작동. -->
+
+	<dept>
+		<dname>부서미정</dname>
+	</dept>
+	<dept>
+		<deptno>100</deptno>
+		<dname>고객지원부</dname>
+		<dname>고지부</dname>
+		<loc>서울</loc>
+		<loc>경기</loc>
+		<loc>대전</loc>
+	</dept>
+
+
+	<!-- DTD에 위배되는 상황 : Error발생. -->
+
+	<!-- 노드의 순서는 deptno, dname, loc 순으로. -->
+	<!-- <dept> <deptno>1</deptno> <loc>1</loc> <dname>1</dname> </dept> -->
+
+	<!-- dname은 반드시 하나 이상 작성되어야 한다. - +이기 때문에 -->
+	<!-- <dept> <deptno>100</deptno> <loc>서울</loc> </dept> -->
+
+	<!-- deptno는 0~1개 - ? -->
+	<!-- <dept> <deptno></deptno> <deptno></deptno> <dname></dname> <loc></loc> 
+		</dept> -->
+
+</depts>

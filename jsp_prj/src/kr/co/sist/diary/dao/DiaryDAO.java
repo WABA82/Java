@@ -1,5 +1,8 @@
 package kr.co.sist.diary.dao;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +20,7 @@ import kr.co.sist.diary.vo.DiaryListVO;
 import kr.co.sist.diary.vo.DiaryRemoveVO;
 import kr.co.sist.diary.vo.DiaryUpdateVO;
 import kr.co.sist.diary.vo.DiaryVO;
+import kr.co.sist.diary.vo.ListRangeVO;
 import kr.co.sist.diary.vo.MonthVO;
 import kr.co.sist.diary.vo.SearchDataVO;
 
@@ -59,7 +63,7 @@ public class DiaryDAO {
 			con = ds.getConnection();
 		} catch (NamingException ne) {
 			ne.printStackTrace();
-		} // enc catch
+		} // end catch
 
 		return con;
 	}// getConn
@@ -191,14 +195,16 @@ public class DiaryDAO {
 	 * @param num
 	 * @return DiaryDetailVO
 	 * @throws SQLException
+	 * @throws IOException
 	 */
-	public DiaryDetailVO selectDetailEvent(int num) throws SQLException {
+	public DiaryDetailVO selectDetailEvent(int num) throws SQLException, IOException {
 
 		DiaryDetailVO dd_vo = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		BufferedReader br = null;
 
 		try {
 			// 1.
@@ -216,10 +222,24 @@ public class DiaryDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				dd_vo = new DiaryDetailVO(rs.getString("writer"), rs.getString("subject"), rs.getString("contents"), rs.getString("w_date"), rs.getString("ip"));
+
+				// CLOB 처리 _ contents
+				Clob clob = rs.getClob("contents");
+				// CLOB처리를 위한 별도의 스트림 연결.
+				br = new BufferedReader(clob.getCharacterStream());
+				String temp = "";
+				StringBuilder contents = new StringBuilder();
+				while ((temp = br.readLine()) != null) {
+					contents.append(temp);
+				} // end while
+
+				dd_vo = new DiaryDetailVO(rs.getString("writer"), rs.getString("subject"), contents.toString(), rs.getString("w_date"), rs.getString("ip"));
 			} // end if
 
 		} finally {// 6.연결끊기
+			if (br != null) {
+				br.close();
+			} // end if
 			if (rs != null) {
 				rs.close();
 			} // end if
@@ -314,7 +334,7 @@ public class DiaryDAO {
 		return cnt;
 	}// deleteEvent
 
-	public int selectCnt(SearchDataVO sd_vo) throws SQLException {
+	public int selectEvtCnt(SearchDataVO sd_vo) throws SQLException {
 		int cnt = 0;
 
 		Connection con = null;
@@ -325,11 +345,15 @@ public class DiaryDAO {
 
 			con = getConn();
 			StringBuilder selectCnt = new StringBuilder();
-			selectCnt.append(" select count(*) from diary");
+			selectCnt.append(" select count(*) cnt from diary");
 			if (sd_vo != null) {
 				// Dynamic Query
+				selectCnt.append(" where ").append(sd_vo.getFieldName()).append(" like '%'||?||'%' ");
 			} // end if
 			pstmt = con.prepareStatement(selectCnt.toString());
+			if (sd_vo != null) {
+				pstmt.setString(1, sd_vo.getKeyword());
+			} // end if
 
 			rs = pstmt.executeQuery();
 
@@ -358,9 +382,61 @@ public class DiaryDAO {
 	 * @param sd_vo
 	 * @return list
 	 */
-	public List<DiaryListVO> selectList(SearchDataVO sd_vo) {
+	public List<DiaryListVO> selectList(ListRangeVO lr_vo, SearchDataVO sd_vo) throws SQLException {
 		List<DiaryListVO> list = new ArrayList<>();
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			// 1.
+			// 2.
+			// 3.
+			con = getConn();
+			// 4.
+			StringBuilder selectList = new StringBuilder();
+			selectList.append(" select r_num, num, subject, writer, e_year, e_month, e_day, to_char(w_date, 'yyyy-mm-dd hh24:mi') w_date ");
+			selectList.append(" from (select num, subject, writer, e_year, e_month, e_day, w_date, row_number() over(order by w_date desc) r_num");
+			selectList.append(" from diary");
+
+			if (sd_vo != null) { // Dynamic Query
+				selectList.append(" where ").append(sd_vo.getFieldName()).append(" like '%'||?||'%' ");
+			} // end if
+
+			selectList.append(" ) ");
+			selectList.append(" where r_num between ? and ? ");
+
+			pstmt = con.prepareStatement(selectList.toString());
+
+			int bindidx = 1; // 다이나믹 쿼리에 의한...
+			if (sd_vo != null) {
+				pstmt.setString(bindidx++, sd_vo.getKeyword());
+			} // end if
+			pstmt.setInt(bindidx++, lr_vo.getStartNum());
+			pstmt.setInt(bindidx++, lr_vo.getEndNum());
+
+			// 5.
+			DiaryListVO dl_vo = null;
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				dl_vo = new DiaryListVO(rs.getInt("num"), rs.getString("writer"), rs.getString("subject"), rs.getString("e_year"), rs.getString("e_month"), rs.getString("e_day"), rs.getString("w_date"));
+				list.add(dl_vo);
+			} // end while
+
+		} finally { // 6.
+			if (rs != null) {
+				rs.close();
+			} // end if
+			if (pstmt != null) {
+				pstmt.close();
+			} // end if
+			if (con != null) {
+				con.close();
+			} // end if
+		} // end finally
 		return list;
 	}// selectList
 

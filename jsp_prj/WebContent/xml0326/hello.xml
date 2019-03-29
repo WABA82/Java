@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE root SYSTEM "hello.dtd">
+<root>
+	<msg>안녕XML</msg>
+	<msg>오늘은 화요일</msg>
+
+	<!-- <msg1>DTD에 선언되지 않은 태그는 사용할 수 없다.</msg1> -->
+	<!-- <msg>닫힘노드가 없으므로 에러발생. -->
+	<!-- <Hello>대소문자를 구분한다.</hello> -->
+</root>
+<!-- <root> 최상위 부모노드는 반드시 하나만 존재해야 합니다. </root> -->

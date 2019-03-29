@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE computers SYSTEM "computer.dtd">
+
+<computers>
+	<computer>
+		<cpu brand="인텔">i5, 3.30GHz</cpu>
+		<mb brand="기가바이트">GM001</mb>
+		<ram>16GB</ram>
+		<ps>7team</ps>
+		<hdd brand="WD">WD 1TByte</hdd>
+		<!-- 둘중 하나만 사용 가능. <ssd></ssd> -->
+		<odd>LG DVD</odd>
+		<vga brand="NVIDIA">GTX-2080</vga>
+	</computer>
+</computers>
