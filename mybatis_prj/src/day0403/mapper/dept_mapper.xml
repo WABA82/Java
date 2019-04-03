@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- 쿼리문을 정의 -->
+<!-- namespace : XML내에서 중복된 id를 사용할 수 있도록 구분하는 것. (자바의 패키지와 비슷한 용도.) -->
+<mapper namespace="kr.co.sist">
+	<select id="selectAllDept" resultType="day0403.DeptDomain">
+		<!-- select * from Blog where id = #{id} -->
+		SELECT DEPTNO, DNAME, LOC FROM CP_DEPT
+	</select>
+	
+	<insert id="insertCpDept" parameterType="day0403.DeptVO">
+		INSERT INTO CP_DEPT(DEPTNO, DNAME, LOC) 
+		VALUES(#{deptno}, #{dname}, #{loc})
+	</insert>
+	
+	
+	<update id="updateCpDept" parameterType="day0403.DeptVO">
+		UPDATE CP_DEPT
+		SET DNAME=#{dname}, LOC=#{loc}
+		WHERE DEPTNO=#{deptno}
+	</update>
+	
+	<delete id="deleteCpDept" parameterType="int">
+		DELETE FROM CP_DEPT
+		WHERE DEPTNO = #{ deptno }
+	</delete>
+	
+</mapper>
