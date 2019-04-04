@@ -12,6 +12,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class UseMyBatis {
 
+	public UseMyBatis() {
+		org.apache.ibatis.logging.LogFactory.useLog4JLogging();
+	}// 기본생성자.
+
 	public SqlSessionFactory getSessionFactory() throws IOException {
 
 		// 1.환결설정 xml에 stream연결.
@@ -76,7 +80,8 @@ public class UseMyBatis {
 
 	public static void main(String[] args) {
 		UseMyBatis umb = new UseMyBatis();
-		DeptVO d_vo = new DeptVO(11, "SM엔터", "원주");
+		// 추가 변경 삭제를 위해 사용하는 VO.
+		///DeptVO d_vo = new DeptVO(11, "SM엔터", "원주");
 		try {
 
 			// 추가

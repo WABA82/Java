@@ -6,21 +6,30 @@
 <!-- 설정정보를 properties에 넣고 하는 것 -->
 <!-- 설정 정보를 직접 Hard Coding -->
 <configuration>
+	<!-- 외부속성파일 -->
+	<properties resource="properties/database.properties" />
+
+	<!-- typeAlias -->
+	<typeAliases>
+		<typeAlias type="kr.co.sist.exam.domain.DeptInfo" alias="di"/>
+	</typeAliases>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="oracle.jdbc.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
-				<property name="username" value="scott" />
-				<property name="password" value="tiger" />
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${userid}" />
+				<property name="password" value="${userpass}" />
 			</dataSource>
 		</environment>
 	</environments>
 
 	<!-- 쿼리문을 가진 xml을 연결. -->
 	<mappers>
-		<mapper resource="day0403/mapper/dept_mapper.xml" />
+		<mapper resource="kr/co/sist/exam/mapper/exam_mapper1.xml"/>
+		<mapper resource="kr/co/sist/exam/mapper/exam_mapper2.xml"/>
 	</mappers>
 	<!-- 쿼리문을 가진 xml을 연결. -->
 </configuration>
