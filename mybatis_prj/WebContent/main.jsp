@@ -76,9 +76,9 @@
 		</div>
 
 		<div id="container">
-		<c:if test="${ not empty param.page }">
-			<c:import url="day0404/${ param.page }.jsp" />
-		</c:if>
+			<c:if test="${ not empty param.page }">
+				<c:import url="${ param.page }.jsp" />
+			</c:if>
 		</div>
 
 		<div id="footer">
