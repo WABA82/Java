@@ -1,8 +1,15 @@
 package kr.co.sist.exam.domain;
 
-public class Emp {
-	private int empno, sal, mgr;
-	private String ename, job, hiredate;
+/**
+ * 노진경 학생이 적극 권장한 클래스명.
+ * 
+ * @author owner
+ *
+ */
+public class Demp {
+
+	private int empno, sal;
+	private String ename, hiredate;
 
 	public int getEmpno() {
 		return empno;
@@ -20,28 +27,12 @@ public class Emp {
 		this.sal = sal;
 	}
 
-	public int getMgr() {
-		return mgr;
-	}
-
-	public void setMgr(int mgr) {
-		this.mgr = mgr;
-	}
-
 	public String getEname() {
 		return ename;
 	}
 
 	public void setEname(String ename) {
 		this.ename = ename;
-	}
-
-	public String getJob() {
-		return job;
-	}
-
-	public void setJob(String job) {
-		this.job = job;
 	}
 
 	public String getHiredate() {

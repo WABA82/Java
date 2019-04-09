@@ -1,7 +1,7 @@
 package kr.co.sist.exam.domain;
 
-public class Emp {
-	private int empno, sal, mgr;
+public class DynamicIf {
+	private int empno, deptno;
 	private String ename, job, hiredate;
 
 	public int getEmpno() {
@@ -12,20 +12,12 @@ public class Emp {
 		this.empno = empno;
 	}
 
-	public int getSal() {
-		return sal;
+	public int getDeptno() {
+		return deptno;
 	}
 
-	public void setSal(int sal) {
-		this.sal = sal;
-	}
-
-	public int getMgr() {
-		return mgr;
-	}
-
-	public void setMgr(int mgr) {
-		this.mgr = mgr;
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
 	}
 
 	public String getEname() {
@@ -52,4 +44,4 @@ public class Emp {
 		this.hiredate = hiredate;
 	}
 
-}// class
+}

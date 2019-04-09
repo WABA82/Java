@@ -60,7 +60,6 @@
 <!-- 자바스크립트 작성. -->
 <script type="text/javascript">
 	$(function() {
-
 	}); //ready
 </script>
 <!-- 자바스크립트 작성. -->

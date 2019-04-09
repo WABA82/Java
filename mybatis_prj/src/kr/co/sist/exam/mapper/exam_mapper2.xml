@@ -37,9 +37,20 @@
 		<result column="loc" property="loc" />
 	</resultMap>
 
+	<!-- Car ResultMap - 컬럼명과 domain의 setter메서드가 다른 경우... -->
+	<resultMap type="kr.co.sist.exam.domain.Car" id="carResult">
+		<result column="car_img" property="img" />
+		<result column="maker" property="maker" />
+		<result column="model" property="model" />
+		<result column="car_year" property="carYear" />
+		<result column="price" property="price" />
+		<result column="car_option" property="carOption" />
+	</resultMap>
+	
 	<select id="diaryCnt" resultType="int">
 		select count(*) cnt from diary
 	</select>
+
 	<!-- subquery 조회 할때. diary테이블에서 가장 마지막 글에서 부터 시작 번호와 끝 번호 사이의 글을 조회. -->
 	<select id="subquery" resultMap="dlResult"
 		parameterType="kr.co.sist.exam.vo.DiaryListParamVO">
@@ -69,9 +80,72 @@
 		where e.deptno = d.deptno and e.mgr=#{mgr}
 	</select>
 	
-	<!-- join+subquery 의 조회 -->
-	<!-- 컬럼명 또는 테이블명 동적일때의 조회 -->
-	<!-- dynamic query: where, if, choose, foreach -->
+	<!-- join+subquery 의 조회
+		차량이미지, 제조사, 모델명, 연식, 가격, 옵션을 조회하세요.
+		가장 마지막에 입력된 차량부터 10건만 조회.
+	-->
+	<select id="joinSubquery" resultMap="carResult">
+		select car_img, maker, model, car_year, price, car_option, to_char(hiredate,'yyyy-mm-dd hh24:mi') hiredate
+		from (select car_img, maker, model, car_year, price, car_option, hiredate, row_number() over(order by hiredate desc) r_num
+				from	(select cmo.car_img, cma.maker, cmo.model, cmo.car_year, cmo.price, cmo.car_option, cmo.hiredate
+						from car_maker cma, car_model cmo
+						where cmo.model=cma.model))
+		where r_num between 1 and 10
+	</select>
+	
+	<!-- 컬럼명 또는 테이블명 동적일때의 조회 - 반드시 parameterType이 VO이어야 하고 ${getter를} 사용해야 한다.
+		컬럼이 동일형으로 하나만 조회되는 경우에는 동적으로 사용할 수 있다.
+		하지만, 컬럼이 여러개가 조회되는 경우에는 동적으로 사용하기 어렵다.
+	 
+	 	// 실습.
+	 	테이블명이 외부에서 입력되고(emp, cp_emp2), 동일 컬럼이 조회되는 경우 조회.
+	 	조회 컬럼 : EMPNO, ENAME, HIREDATE, SAL
+	 -->
+	<resultMap type="kr.co.sist.exam.domain.Demp" id="dyanmicTable">
+		<result column="empno" property="empno"/>	
+		<result column="ename" property="ename"/>	
+		<result column="hiredate" property="hiredate"/>	
+		<result column="sal" property="sal"/>	
+	</resultMap>
+	
+	<select id="dtable" resultMap="dyanmicTable" parameterType="kr.co.sist.exam.vo.TnameVO">
+		select empno, ename, hiredate, sal
+		from ${tname}
+	</select>
+	
+	<!-- dynamic query-OGNL: where, if, choose, foreach -->
+	
+	<!-- if의 사용 : 
+		부서번호가 10~19사이면 10번 부서사원 검색하고,
+		20~29번 사이면 20번 부서 사원 검색하고,
+		30~39번 사이면 30번 부서 조회 그렇지 안흐면 전체 조회.
+	-->
+	<resultMap type="kr.co.sist.exam.domain.DynamicIf" id="ifResult">
+		<result column="empno" property="empno"/>
+		<result column="deptno" property="deptno"/>
+		<result column="ename" property="ename"/>
+		<result column="job" property="job"/>
+		<result column="hiredate" property="hiredate"/>
+	</resultMap>
+	
+	<select id="dynamicIf" resultMap="ifResult" parameterType="kr.co.sist.exam.vo.DeptnoVO">
+		select empno, ename, job, deptno, to_char(hiredate, 'yyyy-mm-dd') hiredate
+		from emp
+		<where>
+			<if test="deptno &gt; 9 and deptno &lt; 20">
+				deptno = 10
+			</if>		
+			<if test="deptno &gt; 19 and deptno &lt; 30">
+				deptno = 20
+			</if>		
+			<if test="deptno &gt; 29 and deptno &lt; 40">
+				deptno = 30
+			</if>		
+		</where>
+	</select>
+		
+	<!-- dynamic query-OGNL: where, if, choose, foreach -->
+	
 	<!-- 프로시저 호출 -->
 
 </mapper>

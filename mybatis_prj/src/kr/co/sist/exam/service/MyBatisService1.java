@@ -3,13 +3,18 @@ package kr.co.sist.exam.service;
 import java.util.List;
 
 import kr.co.sist.exam.dao.MyBatisDAO1;
+import kr.co.sist.exam.domain.Car;
+import kr.co.sist.exam.domain.Demp;
 import kr.co.sist.exam.domain.DiaryList;
+import kr.co.sist.exam.domain.DynamicIf;
 import kr.co.sist.exam.domain.Emp;
 import kr.co.sist.exam.domain.EmpJoin;
 import kr.co.sist.exam.domain.Union;
 import kr.co.sist.exam.domain.Zipcode;
+import kr.co.sist.exam.vo.DeptnoVO;
 import kr.co.sist.exam.vo.DiaryListParamVO;
 import kr.co.sist.exam.vo.EmpVO;
+import kr.co.sist.exam.vo.TnameVO;
 
 public class MyBatisService1 {
 	public List<Emp> multiParam(EmpVO ev) {
@@ -114,5 +119,34 @@ public class MyBatisService1 {
 		list = mb_dao.join(mgr);
 		return list;
 	}// join
+
+	public List<Car> joinSubquery() {
+		List<Car> list = null;
+		MyBatisDAO1 mb_dao = new MyBatisDAO1();
+		list = mb_dao.joinSubquery();
+		// car_option이 25자 이상이라면 24자 까지 보여주고 "..."으로 처리
+		for (Car car : list) {
+			if (car.getCarOption().length() > 25) {
+				car.setCarOption(car.getCarOption().substring(0, 24) + "...");
+			}
+		}
+		return list;
+	}// joinSubquery
+
+	public List<Demp> dynamicTable(TnameVO t_vo) {
+		List<Demp> list = null;
+		MyBatisDAO1 mb_dao1 = new MyBatisDAO1();
+		list = mb_dao1.dynamicTable(t_vo);
+		return list;
+	}// dynamicTable
+
+	public List<DynamicIf> dynamicIf(DeptnoVO d_vo) {
+		List<DynamicIf> list = null;
+		
+		MyBatisDAO1 mb_dao1 = new MyBatisDAO1();
+		list = mb_dao1.dynamicIf(d_vo);
+		
+		return list;
+	}// dynamicIf
 
 }// MyBatisService1

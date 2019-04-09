@@ -95,7 +95,7 @@ public class MyBatisDAO {
 	
 	public static void main(String[] args) {
 		MyBatisDAO m= MyBatisDAO.getInstance();
-		System.out.println(m.multiColumn());
+		System.out.println(m.multiRow());
 	}//main
 	
 }

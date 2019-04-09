@@ -30,6 +30,7 @@
 	<mappers>
 		<mapper resource="kr/co/sist/exam/mapper/exam_mapper1.xml"/>
 		<mapper resource="kr/co/sist/exam/mapper/exam_mapper2.xml"/>
+		<mapper resource="kr/co/sist/exam/mapper/exam_mapper_hw.xml"/>
 	</mappers>
 	<!-- 쿼리문을 가진 xml을 연결. -->
 </configuration>

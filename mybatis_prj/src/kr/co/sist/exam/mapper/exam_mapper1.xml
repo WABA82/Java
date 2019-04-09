@@ -5,6 +5,7 @@
 
 
 <mapper namespace="kr.co.sist.exam1">
+
 <!-- Emp Domain을 resultMap으로 설정 -->
 <resultMap type="kr.co.sist.exam.domain.Emp" id="empResult">
 	<result column="EMPNO" property="empno"/>
@@ -14,6 +15,7 @@
 	<result column="HIREDATE" property="hiredate"/>
 	<result column="MGR" property="mgr"/>
 </resultMap>
+
 <!-- Zipcode Domain을 컬럼과 매핑 -->
 <resultMap type="kr.co.sist.exam.domain.Zipcode" id="zipcodeResult">
 	<result column="zipcode" property="zipcode"/>
@@ -51,15 +53,21 @@
 	 	SELECT DEPTNO
 	 	FROM DEPT
 	 </select>
-	
-	
+	 
 	<!-- 컬럼 여러개 레코드 하나 조회 할때. -->
 	<!-- <typeAlias> : Domain이나 VO를 미리 등록(iBATIS - mapper정의, MyBatis-설정파일)해두고 
 		짧은 이름으로 사용할 때. -->
 	<!-- 조회되는 컬럼은 대소문자를 구분하지 않지만 setter method는 대소문자를 구분한다. -->
 	<!-- iBATIS에서는 컬럼명 또는 컬럼명 as setter명. -->
 	<!-- < ... resultType="패키지명.Domain명 또는 typeAlias의 id가 사용된다." -->
-	<!-- <select id="multiColumn" resultType="di"> -->
+	<!-- <select id="multiColumn" resultType="id"> -->
+	<!--<select id="multiColum" resultType="kr.co.sist.exam.domain.DeptInfo">-->
+	<select id="multiColumn" resultType="di">
+		select dname,loc
+		from dept
+		where deptno=10
+	</select>
+	
 	<!-- 컬럼여러개 레코드 여러개 조회 
 			입력되는(parameterType) 부서번호에 따른 사원정보 조회(resultType)
 			

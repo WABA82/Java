@@ -49,6 +49,18 @@
                 <li><a href="main.jsp?page=day0408/join">Join 셀렉트</a></li>
               </ul>
             </li>
+            <li><a href="#void">4일차</a>
+              <ul>
+                <li><a href="main.jsp?page=day0409/join_subquery">조인과 서브쿼리를 이용한 셀렉트</a></li>
+                <li><a href="main.jsp?page=day0409/dynamic_table">테이블명이 동즉으로 바뀔때.</a></li>
+                <li><a href="main.jsp?page=day0409/dynamic_if">Dynamic_if</a></li>
+              </ul>
+            </li>
+            <li><a href="#void">숙제</a>
+              <ul>
+                <li><a href="main.jsp?page=day0409/hw_search_car">Car테이블 조건검색</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         </ul>

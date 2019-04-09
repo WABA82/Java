@@ -4,13 +4,18 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.co.sist.exam.domain.Car;
+import kr.co.sist.exam.domain.Demp;
 import kr.co.sist.exam.domain.DiaryList;
+import kr.co.sist.exam.domain.DynamicIf;
 import kr.co.sist.exam.domain.Emp;
 import kr.co.sist.exam.domain.EmpJoin;
 import kr.co.sist.exam.domain.Union;
 import kr.co.sist.exam.domain.Zipcode;
+import kr.co.sist.exam.vo.DeptnoVO;
 import kr.co.sist.exam.vo.DiaryListParamVO;
 import kr.co.sist.exam.vo.EmpVO;
+import kr.co.sist.exam.vo.TnameVO;
 
 public class MyBatisDAO1 {
 
@@ -81,9 +86,30 @@ public class MyBatisDAO1 {
 		return list;
 	}// join
 
+	public List<Car> joinSubquery() {
+		List<Car> list = null;
+		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
+		list = ss.selectList("joinSubquery");
+		return list;
+	}// joinSubquery
+
+	public List<Demp> dynamicTable(TnameVO t_vo) {
+		List<Demp> list = null;
+		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
+		list = ss.selectList("dtable", t_vo);
+		return list;
+	}// dynamicTable
+
+	public List<DynamicIf> dynamicIf(DeptnoVO d_vo) {
+		List<DynamicIf> list = null;
+		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
+		list = ss.selectList("dynamicIf", d_vo);
+		return list;
+	}
+
 	public static void main(String[] args) {
 		MyBatisDAO1 md = new MyBatisDAO1();
-		md.union();
+		md.dynamicIf(new DeptnoVO(13));
 	}// main
 
-}
+}// class
