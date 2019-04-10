@@ -1,5 +1,6 @@
 package kr.co.sist.exam.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.sist.exam.dao.MyBatisDAO1;
@@ -11,9 +12,11 @@ import kr.co.sist.exam.domain.Emp;
 import kr.co.sist.exam.domain.EmpJoin;
 import kr.co.sist.exam.domain.Union;
 import kr.co.sist.exam.domain.Zipcode;
+import kr.co.sist.exam.vo.CarVO;
 import kr.co.sist.exam.vo.DeptnoVO;
 import kr.co.sist.exam.vo.DiaryListParamVO;
 import kr.co.sist.exam.vo.EmpVO;
+import kr.co.sist.exam.vo.TestProcVO;
 import kr.co.sist.exam.vo.TnameVO;
 
 public class MyBatisService1 {
@@ -148,5 +151,37 @@ public class MyBatisService1 {
 		
 		return list;
 	}// dynamicIf
+	
+	public List<DynamicIf> dynamicChoose(DeptnoVO d_vo) {
+		List<DynamicIf> list = null;
+		MyBatisDAO1 mb_dao1 = new MyBatisDAO1();
+		list = mb_dao1.dynamicChoose(d_vo);
+		return list;
+	}// dynamicIf
+	
+	public List<Car> dynamicForeach(String[] makerArr) {
+		List<Car> list = null;
+		
+		List<String> makerList = null;
+		// 입력되는 배열의 값이 존재 한다면 makerList에 추가.
+		if(makerArr != null) {
+			makerList = new ArrayList<String>();
+			for(String temp : makerArr) {
+				makerList.add(temp);
+			}// end for
+		}// end if
+		
+		CarVO c_vo = new CarVO(makerList);
+		
+		MyBatisDAO1 mb_dao1 = new MyBatisDAO1();
+		list = mb_dao1.dynamicForeach(c_vo);
+		return list;
+	}// dynamicIf
 
+	public TestProcVO insertProcedure(TestProcVO tp_vo) {
+		MyBatisDAO1 mb_dao = new MyBatisDAO1();
+		tp_vo = mb_dao.insertProc(tp_vo);
+		return tp_vo;
+	}// insertProcedure
+	
 }// MyBatisService1

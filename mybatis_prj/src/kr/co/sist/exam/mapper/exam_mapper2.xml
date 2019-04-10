@@ -113,7 +113,7 @@
 		from ${tname}
 	</select>
 	
-	<!-- dynamic query-OGNL: where, if, choose, foreach -->
+	<!-- dynamic query-OGNL: ifforeach -->
 	
 	<!-- if의 사용 : 
 		부서번호가 10~19사이면 10번 부서사원 검색하고,
@@ -144,8 +144,67 @@
 		</where>
 	</select>
 		
-	<!-- dynamic query-OGNL: where, if, choose, foreach -->
+	<!-- dynamic query-OGNL: chooseforeach
+		부서번호가 10~19사이면 10번 부서사원 검색하고,
+		20~29번 사이면 20번 부서 사원 검색하고,
+		30~39번 사이면 30번 부서 조회,
+		그렇지 않으면 30번 부서 조회.
+	-->
+	<select id="dynamicChoose" resultMap="ifResult" parameterType="kr.co.sist.exam.vo.DeptnoVO">
+		select empno, ename, job, deptno, to_char(hiredate, 'yyyy-mm-dd') hiredate
+		from emp
+		<where>
+			<choose>
+				<when test="deptno &gt;= 10 and deptno &lt; 20">
+					deptno = 10
+				</when>
+				<when test="deptno &gt;= 20 and deptno &lt; 30">
+					deptno = 20
+				</when>
+				<otherwise>
+					deptno = 30
+				</otherwise>
+			</choose>
+		</where>
+	</select>
 	
-	<!-- 프로시저 호출 -->
+	<!-- dynamic query-OGNL: forEach -->
+	<select id="dynamicForEach" resultMap="carResult" parameterType="kr.co.sist.exam.vo.CarVO">
+	select car_img, maker, model, car_year, price, car_option, to_char(hiredate,'yyyy-mm-dd hh24:mi') hiredate
+	from (select car_img, maker, model, car_year, price, car_option, hiredate, row_number() over(order by hiredate desc) r_num
+			from	(select cmo.car_img, cma.maker, cmo.model, cmo.car_year, cmo.price, cmo.car_option, cmo.hiredate
+					from car_maker cma, car_model cmo
+					where cmo.model=cma.model
+					<if test="makerList != null">
+						and cma.maker in 
+						<foreach collection="makerList" item="maker" open="(" close=")" separator=",">
+							#{ maker }
+						</foreach>
+					</if>
+				))
+	</select>
+	
+	
+	<!-- 프로시저 호출1 : insert
+		insert_test_proc(10000,'공선의', 3000, '사원', :m, :c)
+		프로시저를 호출할 때 in parameter값과 out parameter값은 모두
+		VO에 함께 들어가 있어야 합니다.
+		
+		in parameter의 경우 _ #{getter, mode=IN}
+		단일 데이터형일때
+		out parameter의 경우 _ #{setter, mode=OUT, jdbcType=, javaType=} 
+	-->
+	<select id="insertProcedure" parameterType="kr.co.sist.exam.vo.TestProcVO" statementType="CALLABLE">
+	{
+		call insert_test_proc(#{ empno, mode=IN},
+		 #{ ename, mode=IN}, 
+		 #{ sal, mode=IN}, 
+		 #{ job, mode=IN},
+		 #{ msg, mode=OUT, jdbcType=VARCHAR, javaType=String},  
+		 #{ rowCnt, mode=OUT, jdbcType=NUMERIC, javaType=int})
+	}
+	</select>
+	
+	<!-- 프로시저 호출2 : cursor -->
 
 </mapper>
