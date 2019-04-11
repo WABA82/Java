@@ -16,6 +16,7 @@
 		pageContext.setAttribute("empList", list);
 	} //end if
 %>
+
 <form name="frm" action="main.jsp">
 	<input type="hidden" name="page" value="day0410/dynamic_choose" /> 
 	<label>부서번호 입력</label> 
@@ -24,6 +25,7 @@
 	<br>
 	10~30번 부서의 사원을 조회 합니다. 없는 부서번호가 입력되면 30번 부서의 사원을 조회합니다.
 </form>
+
 <div>
 	<c:if test="${not empty param.deptno }">
 		<div>

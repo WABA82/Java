@@ -13,11 +13,13 @@ import kr.co.sist.exam.domain.EmpJoin;
 import kr.co.sist.exam.domain.Union;
 import kr.co.sist.exam.domain.Zipcode;
 import kr.co.sist.exam.vo.CarVO;
+import kr.co.sist.exam.vo.CursorVO;
 import kr.co.sist.exam.vo.DeptnoVO;
 import kr.co.sist.exam.vo.DiaryListParamVO;
 import kr.co.sist.exam.vo.EmpVO;
 import kr.co.sist.exam.vo.TestProcVO;
 import kr.co.sist.exam.vo.TnameVO;
+import kr.co.sist.exam.vo.TransactionVO;
 
 public class MyBatisDAO1 {
 
@@ -108,14 +110,14 @@ public class MyBatisDAO1 {
 		list = ss.selectList("dynamicIf", d_vo);
 		return list;
 	}
-	
+
 	public List<DynamicIf> dynamicChoose(DeptnoVO d_vo) {
 		List<DynamicIf> list = null;
 		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
 		list = ss.selectList("kr.co.sist.exam2.dynamicChoose", d_vo);
 		return list;
 	}
-	
+
 	public List<Car> dynamicForeach(CarVO c_vo) {
 		List<Car> list = null;
 		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
@@ -125,17 +127,35 @@ public class MyBatisDAO1 {
 
 	public TestProcVO insertProc(TestProcVO tp_vo) {
 		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
-		
+
 		System.out.println("----------------" + tp_vo.getMsg());
 		ss.selectOne("insertProcedure", tp_vo);
 		System.out.println("----------------" + tp_vo.getMsg());
 		return tp_vo;
 	}
+
+	public void selectProc(CursorVO c_vo) {
+		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
+		ss.selectOne("selectProcedure", c_vo);
+	}
+
+	public int insertTransaction(TransactionVO t_vo) {
+		int cnt = 0, cnt1 = 0 ;
+		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
+		cnt = ss.insert("tr1", t_vo);
+		cnt1 = ss.insert("tr2", t_vo);
+		
+		// Transaction√≥∏Æ
+		if ((cnt+cnt1) == 2) {
+			ss.commit();
+		}
+		return cnt+cnt1;
+	}
 	
 	public static void main(String[] args) {
 		MyBatisDAO1 md = new MyBatisDAO1();
-		TestProcVO tp_vo = new TestProcVO(1111, 3000, 0, "±Ë»Ò√∂", "¥Î∏Æ", "");
-		md.insertProc(tp_vo);
+		TransactionVO t_vo = new TransactionVO("ø¿¥√¿∫ ∏ÒøÁ","±Ë¡§¿±");
+		System.out.println(md.insertTransaction(t_vo));
 	}// main
 
 }// class
