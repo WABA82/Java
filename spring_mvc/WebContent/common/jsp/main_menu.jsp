@@ -19,7 +19,7 @@
 	});
 
 	function sendPost() {
-		
+
 		// 크롬브라우저에서 자바스크립트의 action을 변경하면 form의 action이 계속 유지된다.
 		document.hidFrm.action = "request_post.do";
 		document.hidFrm.submit();
@@ -40,6 +40,23 @@
 		document.hidFrm.action = "request_all.do";
 		document.hidFrm.submit();
 	}
+
+	function requestString() {
+		var url = "request_string.do"
+
+		if (confirm("문자열의 매개변수를 전송 하시겠습니까?")) {
+			url += "?name=jungyun";
+		}//  end if
+		location.href = url;
+	}
+	function requestInt() {
+		var url = "request_int.do"
+
+		if (confirm("정수형의 매개변수를 전송 하시겠습니까?")) {
+			url += "?age=20";
+		}// end if
+		location.href = url;
+	}
 </script>
 <form action="request_post.do" name="hidFrm" id="hidFrm" method="post"></form>
 <!--smart menu끝  -->
@@ -49,15 +66,23 @@
 		<li><a href="#void">Spring MVC 사용</a>
 			<ul>
 				<li><a href="#void">1 일차</a>
-				<ul>
-					<li><a href="request_get.do">GET 방식 요청</a></li>
-					<li><a href="#void" onclick="sendPost()">POST 방식 요청</a></li>
-					<li><a href="#void" onclick="requestAll()">GET/POST 모두 요청</a></li>
-					<li><a href="request_form.do">HttpServletResquest로 파라미터 처리</a></li>
-					<li><a href="vo_form.do">VO 파라미터 처리</a></li>
-				</ul>
+					<ul>
+						<li><a href="request_get.do">GET 방식 요청</a></li>
+						<li><a href="#void" onclick="sendPost()">POST 방식 요청</a></li>
+						<li><a href="#void" onclick="requestAll()">GET/POST 모두 요청</a></li>
+						<li><a href="request_form.do">HttpServletResquest로 파라미터 처리</a></li>
+						<li><a href="vo_form.do">VO 파라미터 처리</a></li>
+					</ul></li>
+				<li><a href="#void">2 일차</a>
+					<ul>
+						<li><a href="#void" onclick="requestString()">단일 데이터형 처리(문자열)</a></li>
+						<li><a href="#void" onclick="requestInt()">단일 데이터형 처리(정수형)</a></li>
+						<li><a href="view_request.do">HttpServletRequest 사용 데이터 전달.</a></li>
+						<li><a href="view_model.do">Model 사용 데이터 전달.</a></li>
+						<li><a href="view_modelandview.do">ModelAndView 사용 데이터 전달.</a></li>
+						<li><a href="use_redirect.do">Redirect의 페이지 이동</a></li>
+					</ul></li>
 			</ul>
-		</li>
 		<li><a href="#void">동기방식 차량 조회</a></li>
 	</ul>
 </nav>
