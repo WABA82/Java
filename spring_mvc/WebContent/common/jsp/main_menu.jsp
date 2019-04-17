@@ -63,6 +63,7 @@
 <nav id="main-nav">
 	<!-- Sample menu definition -->
 	<ul id="main-menu" class="sm sm-simple">
+		<li><a href="http://localhost:8080/spring_mvc/index.html">홈으로</a></li>
 		<li><a href="#void">Spring MVC 사용</a>
 			<ul>
 				<li><a href="#void">1 일차</a>
@@ -82,6 +83,19 @@
 						<li><a href="view_modelandview.do">ModelAndView 사용 데이터 전달.</a></li>
 						<li><a href="use_redirect.do">Redirect의 페이지 이동</a></li>
 					</ul></li>
+				<li><a href="#void">3 일차</a>
+					<ul>
+						<li><a href="session/use_session.do">HttpSession 사용</a></li>
+						<li><a href="session/an_use_session.do">@SessionAttribute 사용</a></li>
+					</ul></li>
+				<li><a href="#void">4 일차</a>
+					<ul>
+						<li><a href="cookie/read_cookie.do">Cookie클래스를 사용한 값 얻기</a></li>
+						<li><a href="cookie/read_an_cookie.do">@CookieValue를 사용한 값 얻기</a></li>
+						<li><a href="include/include.do">JSP include</a></li>
+						<li><a href="ajax/ajax.do">Spring에서 AJAX 사용.</a></li>
+					</ul>
+				</li>
 			</ul>
 		<li><a href="#void">동기방식 차량 조회</a></li>
 	</ul>
