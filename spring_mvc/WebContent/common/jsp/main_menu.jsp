@@ -96,6 +96,11 @@
 						<li><a href="ajax/ajax.do">Spring에서 AJAX 사용.</a></li>
 					</ul>
 				</li>
+				<li><a href="#void">5 일차</a>
+					<ul>
+						<li><a href="diary/list.do">일정보기(Diary Table)</a></li>
+					</ul>
+				</li>
 			</ul>
 		<li><a href="#void">동기방식 차량 조회</a></li>
 	</ul>

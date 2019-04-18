@@ -345,7 +345,7 @@ public class DiaryDAO {
 
 			con = getConn();
 			StringBuilder selectCnt = new StringBuilder();
-			selectCnt.append(" select count(*) cnt from diary");
+			selectCnt.append(" select count(*) cnt from diary ");
 			if (sd_vo != null) {
 				// Dynamic Query
 				selectCnt.append(" where ").append(sd_vo.getFieldName()).append(" like '%'||?||'%' ");

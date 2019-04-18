@@ -9,7 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.sist.domain.Diary;
+import kr.co.sist.domain.DiaryDetail;
+import kr.co.sist.domain.DiaryReply;
 import kr.co.sist.domain.Notice;
+import kr.co.sist.vo.DiaryVO;
+import kr.co.sist.vo.ReplyVO;
 
 public class MyBatisDAO {
 	private static MyBatisDAO mb_dao;
@@ -55,14 +60,54 @@ public class MyBatisDAO {
 	 */
 	public List<Notice> selectMainNotice() {
 		List<Notice> list = null;
-		SqlSession ss = MyBatisDAO.getInstance().getSessionFactory().openSession();
+		SqlSession ss = getSessionFactory().openSession();
 		list = ss.selectList("noticeList");
 		ss.close();
 		return list;
 	}
 
-	// 단위 테스트용.
-	public static void main(String[] args) {
-	}// main
+	public int selectTotalCount() {
+		SqlSession ss = getSessionFactory().openSession();
+		int cnt = ss.selectOne("diaryTotalCnt");
+		ss.close();
+		return cnt;
+	}// selectTotalCount
+
+	public List<Diary> selectList(DiaryVO d_vo) {
+		List<Diary> list = null;
+		SqlSession ss = getSessionFactory().openSession();
+		list = ss.selectList("diaryList", d_vo);
+		ss.close();
+		return list;
+	}
+
+	public DiaryDetail selectDiaryDetail(int num) {
+		DiaryDetail dd = null;
+		SqlSession ss = getSessionFactory().openSession();
+		dd = ss.selectOne("diaryDetail", num);
+		ss.close();
+		return dd;
+	}
+
+	public List<DiaryReply> selectReplyList(int num) {
+		List<DiaryReply> list = null;
+		SqlSession ss = getSessionFactory().openSession();
+		list = ss.selectList("diaryReply", num);
+		ss.close();
+		return list;
+	}// selectReplyList
+
+	public int insertReply(ReplyVO r_vo) {
+		int cnt = 0;
+		SqlSession ss = getSessionFactory().openSession();
+		cnt = ss.insert("insertReply", r_vo);
+
+		// 트랜젝션 처리.
+		if (cnt == 1) {
+			ss.commit();
+		} // end if
+
+		return cnt;
+	}// insertReply(ReplyVO r_vo)
 
 }// class

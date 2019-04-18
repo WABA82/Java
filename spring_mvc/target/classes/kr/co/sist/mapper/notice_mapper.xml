@@ -12,9 +12,58 @@
 
 	<select id="noticeList" resultMap="noticeResult">
 		select num, subject
-		from (select num, subject, row_number() over(order by w_date desc) r_num
-				from diary)
+		from
+		(select num, subject, row_number() over(order by w_date desc) r_num
+		from diary)
 		where r_num between 1 and 5
 	</select>
+
+
+	<select id="diaryTotalCnt" resultType="int">
+		select count(*) cnt from
+		diary
+	</select>
+
+
+	<resultMap type="kr.co.sist.domain.Diary" id="diaryResult">
+		<result column="num" property="num" />
+		<result column="subject" property="subject" />
+		<result column="writer" property="writer" />
+		<result column="e_year" property="e_year" />
+		<result column="e_month" property="e_month" />
+		<result column="e_day" property="e_day" />
+		<result column="w_date" property="w_date" />
+	</resultMap>
+
+	<select id="diaryList" resultMap="diaryResult"
+		parameterType="kr.co.sist.vo.DiaryVO">
+		select num, subject, writer, e_year, e_month, e_day,
+		to_char(w_date,'yyyy-mm-dd hh24:mi') w_date
+		from
+		(select num, subject, writer, e_year, e_month, e_day, w_date, row_number()
+		over(order by w_date desc) r_num
+		from diary)
+		where r_num between #{startNum} and #{endNum}
+	</select>
+
+	<select id="diaryDetail" parameterType="int"
+		resultType="kr.co.sist.domain.DiaryDetail">
+		SELECT NUM, WRITER, SUBJECT, CONTENTS, TO_CHAR(W_DATE,
+		'YYYY-MM-DD DY HH24:MI') W_DATE, IP
+		FROM DIARY
+		WHERE NUM = #{ num }
+	</select>
+
+	<select id="diaryReply" resultType="kr.co.sist.domain.DiaryReply" parameterType="int">
+		select num, writer, content, to_char(input_date, 'yyyy-mm-dd hh24:mi') input_date
+		from diary_reply
+		where num_ref=#{num_ref}
+		order by num desc
+	</select>
+	
+	<insert id="insertReply" parameterType="kr.co.sist.vo.ReplyVO">
+		insert into diary_reply(num, num_ref, writer, content, input_date)
+		values(seq_reply.nextval, #{num_ref}, #{writer}, #{content}, sysdate)
+	</insert>
 
 </mapper>
