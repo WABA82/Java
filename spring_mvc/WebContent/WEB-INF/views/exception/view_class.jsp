@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="Controller에서 HttpServletRequest를 사용하여 전달된 값을 처리하는 Page"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -60,6 +60,7 @@
 <!-- 자바스크립트 작성. -->
 <script type="text/javascript">
 	$(function() {
+
 	}); //ready
 </script>
 <!-- 자바스크립트 작성. -->
@@ -75,6 +76,9 @@
 		</div>
 
 		<div id="container">
+			정상적인 상황일 때 제공하는 내용.
+			<br>
+			<a href="javascript:history.back()">뒤로</a>
 		</div>
 
 		<div id="footer">

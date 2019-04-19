@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>CSS 디자인 틀</title>
 <link rel="stylesheet" type="text/css" href="http://localhost:8080/spring_mvc/common/css/main_v20190130.css">
+
 <style type="text/css">
 #wrap {
 	margin: 0px auto; /* 가운데 정렬  */
@@ -60,6 +61,7 @@
 <!-- 자바스크립트 작성. -->
 <script type="text/javascript">
 	$(function() {
+
 	}); //ready
 </script>
 <!-- 자바스크립트 작성. -->
@@ -75,6 +77,15 @@
 		</div>
 
 		<div id="container">
+			<img alt="" src="http://localhost:8080/spring_mvc/common/images/err.png">
+			<br>
+			문제가 발생했습니다.
+			<br>
+			간단한 메세지 인 결우 : ${ msg }
+			<br>
+			<!-- 그냥 exception은 내장 객체로 존재하기 때문에 같은 이름이라면 스코프 객체를 명시해야 한다.  -->
+			간단한 메세지 인 결우 : ${ requestScope.exception }
+			
 		</div>
 
 		<div id="footer">

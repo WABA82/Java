@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="Controller에서 HttpServletRequest를 사용하여 전달된 값을 처리하는 Page"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -60,6 +60,7 @@
 <!-- 자바스크립트 작성. -->
 <script type="text/javascript">
 	$(function() {
+
 	}); //ready
 </script>
 <!-- 자바스크립트 작성. -->
@@ -75,6 +76,24 @@
 		</div>
 
 		<div id="container">
+			
+			<!-- Runtime Exception -->
+			<form action="number_format.do" method="get">
+				<label>나이</label> 
+				<input type="text" name="age" class="inputBox">
+				<input type="submit" value="전송" class="btn">
+				<br>
+				문자열을 입력하면 NumberFormatException이 발생하고 처리하는 페이지로 이동합니다.
+			</form>
+		
+			<br>
+			-----------------------------------------------------------------
+			<br>
+			
+			<!-- Compile Exception -->
+			<form action="class_not_found.do" method="get">
+				<input type="submit" value="ClassNotFoudException이 발생(랜덤으로 발생)하는 페이지로 이동" class="btn">
+			</form>
 		</div>
 
 		<div id="footer">

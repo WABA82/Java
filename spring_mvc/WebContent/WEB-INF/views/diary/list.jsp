@@ -187,7 +187,7 @@ tr:hover {
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
 									<td>
-										<c:out value="${ (param.currentPage-1)*pageScale+i }" />
+										<c:out value="${ (totalCount - (param.currentPage-1)*pageScale-i)+1 }" />
 									</td>
 									<td>
 										<a href="bbs_read.do?num=${ data.num }"><c:out value="${ data.subject }" /></a>

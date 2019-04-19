@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" info="Controller에서 HttpServletRequest를 사용하여 전달된 값을 처리하는 Page"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -60,6 +60,7 @@
 <!-- 자바스크립트 작성. -->
 <script type="text/javascript">
 	$(function() {
+
 	}); //ready
 </script>
 <!-- 자바스크립트 작성. -->
@@ -75,6 +76,23 @@
 		</div>
 
 		<div id="container">
+			chain_b.do 요청의 응답되는 내용.
+			<br>
+			<c:choose>
+				<c:when test="${ empty lunch }">
+					햄버거 목록을 받아오세요(chain_a를 거쳐서 와야함).
+					<br>
+					<a href="javascript:history.back()">뒤로</a>
+				</c:when>
+				<c:otherwise>
+				좋아하는 햄버거 선택
+				<br>
+					<c:forEach var="menu" items="${ lunch }">
+						<input type="checkbox" name="menu" value="${ menu }">
+						&lt;c:out&gt; : <c:out value="${ menu }" escapeXml="false" />
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<div id="footer">
