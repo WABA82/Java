@@ -3,14 +3,24 @@ package kr.co.sist.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.co.sist.service.MainService;
 
 @Controller
 public class MainController {
 
+	@Autowired
+	private MainService m_service;
+
 	@RequestMapping(value = "/index.do", method = GET)
-	public String indexPage() {
+	public String indexPage(Model model) {
+
+		model.addAttribute("notice", m_service.noticeList());
+
 		return "index";
 	}// indexPage
 

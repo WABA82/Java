@@ -75,6 +75,16 @@
 		</div>
 
 		<div id="container">
+			<ul>
+				<li>공지사항</li>
+				<c:forEach var="notice" items="${ notice }">
+					<li><c:out value="${ notice.subject }" escapeXml="false" /></li>
+				</c:forEach>
+				<c:if test="${ empty notice }">
+					<li>작성된 공지사항이 없습니다.</li>
+				</c:if>
+			</ul>
+
 		</div>
 
 		<div id="footer">

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+	<!-- 의존성 주입할 객체 설정 - scope 속성 ("객체생성 방법") : singleton - 객체가 하나만 생성. prototype 
+		- 객체가 여러개 생성. request, session - web Application인 경우에만 사용할 수 있다. -->
+	<bean id="td" class="day0423.TestDAO" scope="singleton" />
+	<bean id="td2" class="day0423.TestDAO2" scope="singleton" />
+
+	<!-- 생성자 의존성 주입 - 매개변수를 받을 수 있도록 생성자를 정의 해야 한다. : <constructor-arg ref="id"> -->
+	<bean id="ts" class="day0423.TestService" scope="singleton">
+		<constructor-arg ref="td" />
+		<!-- <constructor-arg> <ref bean="td" /> </constructor-arg> -->
+	</bean>
+
+	<!-- method 의존성 주입 : 기본생성자로 객체가 생성된 이후 setter method가 호출되어 의존성 주입 -->
+	<bean id="ts1" class="day0423.TestService">
+		<!-- name 속성은 setter 메서드의 이름. -->
+		<property name="td" ref="td" />
+	</bean>
+
+	<!-- 생성자의 매개변수가 여러개 일 떄 의존성 주입 호출되는 객체의 생성자 매개변수 만큼 <constructor-arg/>를 
+		기술한다. -->
+	<bean id="ts2" class="day0423.TestService2" scope="singleton">
+		<constructor-arg ref="td" />
+		<constructor-arg ref="td2" />
+	</bean>
+
+	<!-- 기본형 데이터형 와 String 의존성 주입 -->
+	<bean id="pti" class="day0423.PrimitiveTypeInjection">
+		<constructor-arg>
+			<!-- <value>에 type속성을 생략하면 String을 매개변수로 하는 생성자가 호출되고 Injection처리 된다. -->
+			<!-- <value>문자열 호출</value> -->
+
+			<!-- <value>에 type속성에는 패키지명과 클래스파일명을 모두 작성해야 한다. -->
+			<!-- <value type="java.lang.String">문자열 호출</value> -->
+
+			<!-- <value>에 type속성에 기본 데이터형을 정의해 사용 가능.-->
+			<!-- <value type="int">2</value> -->
+			
+			<!-- <value>에 type속성에 기본 데이터형을 정의해 사용 가능.-->
+			<value type="long">25</value>
+		</constructor-arg>
+	</bean>
+
+</beans>

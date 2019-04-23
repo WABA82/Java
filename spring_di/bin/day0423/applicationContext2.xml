@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<!-- List 또는 Set 의존성 주입 -->
+	<bean id="jiList" class="day0423.JCFInjection" scope="singleton">
+		<constructor-arg>
+			<list>
+				<value type="java.lang.String">박영민</value>
+				<value type="java.lang.String">김정윤</value>
+				<value type="java.lang.String">최지우</value>
+				<value type="java.lang.String">노진경</value>
+				<value type="java.lang.String">김희철</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="jiSet" class="day0423.JCFInjection" scope="singleton">
+		<constructor-arg>
+			<set>
+				<value type="java.lang.String">박영민</value>
+				<value type="java.lang.String">박영민</value>
+				<value type="java.lang.String">김정윤</value>
+				<value type="java.lang.String">최지우</value>
+				<value type="java.lang.String">최지우</value>
+			</set>
+		</constructor-arg>
+	</bean>
+
+	<!-- VO를 Generic으로 사용한 List -->
+	<!-- 1. VO를 객체로 생성. -->
+	<bean id="t_vo" class="day0423.TestVO">
+		<constructor-arg>
+			<value type="java.lang.String">노진경</value>
+		</constructor-arg>
+		<constructor-arg>
+			<value type="int">20</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="t_vo1" class="day0423.TestVO">
+		<constructor-arg type="java.lang.String" value="김정운" />
+		<constructor-arg type="int" value="28" />
+	</bean>
+
+	<bean id="t_vo2" class="day0423.TestVO">
+		<constructor-arg type="java.lang.String" value="정택성" />
+		<constructor-arg type="int" value="27" />
+	</bean>
+
+	<!-- VO객체를 생성하여 List에 의존성 주입. -->
+	<bean id="jiVoList" class="day0423.JCFInjection" scope="singleton">
+		<constructor-arg>
+			<list>
+				<ref bean="t_vo" />
+				<ref bean="t_vo1" />
+				<ref bean="t_vo2" />
+			</list>
+		</constructor-arg>
+		<constructor-arg type="int" value="0" />
+	</bean>
+
+	<!-- Map 의존성 주입 -->
+	<bean id="jiMap" class="day0423.JCFInjection">
+		<constructor-arg>
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.String">노진경</value>
+					</key>
+					<value type="java.lang.String">안녕하세요? 쓰앵님</value>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.String">김정윤</value>
+					</key>
+					<value type="java.lang.String">디잘잘, 도차, 철권</value>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.String">김정운</value>
+					</key>
+					<value type="java.lang.String">네트워크, 토익, 홍익인간</value>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.String">공선의</value>
+					</key>
+					<value type="java.lang.String">혁오</value>
+				</entry>
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- annotation 의존성 주입 -->
+
+</beans>
