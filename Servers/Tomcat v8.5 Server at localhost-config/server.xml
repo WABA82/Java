@@ -134,7 +134,7 @@
       <Context docBase="third_prj" path="/third_prj" reloadable="true" source="org.eclipse.jst.jee.server:third_prj"/>
       
       
-      <Context docBase="spring_mvc" path="/spring_mvc" reloadable="true" source="org.eclipse.jst.jee.server:spring_mvc"/></Host>
+      <Context docBase="spring_mvc" path="/spring_mvc" reloadable="true" source="org.eclipse.jst.jee.server:spring_mvc"/><Context docBase="spring_jdbc" path="/spring_jdbc" reloadable="true" source="org.eclipse.jst.jee.server:spring_jdbc"/><Context docBase="jsp_prj" path="/jsp_prj" reloadable="true" source="org.eclipse.jst.jee.server:jsp_prj"/></Host>
     </Engine>
   </Service>
 </Server>

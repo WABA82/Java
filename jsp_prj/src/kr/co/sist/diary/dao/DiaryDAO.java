@@ -68,6 +68,18 @@ public class DiaryDAO {
 		return con;
 	}// getConn
 
+	public static void main(String[] args) {
+		DiaryDAO dd = DiaryDAO.getInstance();
+		try {
+			DiaryDetailVO d_vo = dd.selectDetailEvent(22);
+			System.out.println(d_vo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 연, 월을 입력받아 해당 월의 모든 일자의 글번호, 제목을 MonthVO[][](가변배열)에 저장하여 반환하는 메서드.
 	 * 
