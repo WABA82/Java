@@ -32,6 +32,7 @@
 	<!-- Spring JDBC를 사용할 수 있는 객체 - jdbcTemplate -->
 	<beans:bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
 		<beans:property name="dataSource" ref="dataSource"/>
+		<!-- 사용가능 - <beans:constructor-arg ref="dataSource"/> -->
 	</beans:bean>
 
 	<context:annotation-config/>

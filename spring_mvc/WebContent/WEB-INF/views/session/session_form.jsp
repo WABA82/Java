@@ -78,11 +78,13 @@
 		<div id="container">
 			<div>
 				<form action="session_param.do" method="post">
-					<label>이름 : </label> <input type="text" name="name" class="inputBox" value="${ ses_name }">
+					<label>이름 : </label> <input type="text" name="name" class="inputBox" value="${ sessionScope.ses_name }">
 					<br>
 					<label>주소 : </label> <input type="text" name="addr" class="inputBox" value="${ ses_addr }">
 					<br>
-					<input type="submit" value="전송" class="btn"><a href="remove_session.do">세션삭제</a>
+					<input type="submit" value="전송" class="btn">
+					<br>
+					<a href="remove_session.do">세션삭제</a>
 				</form>
 			</div>
 		</div>
