@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist">
+	<select id="selectAllLunch"  resultType="kr.co.sist.domain.Lunch">
+		select lunch_code,	lunch_name, 's_'||img img, price, to_char(input_date,'yyyy-mm-dd hh24:mi') input_date
+		from lunch
+		order by input_date desc
+	</select>
+	<select id="selectDetail"  resultType="kr.co.sist.domain.LunchDetail">
+		select img, spec
+		from lunch 
+		where lunch_code=#{ lunch_code }
+	</select>
+</mapper> 

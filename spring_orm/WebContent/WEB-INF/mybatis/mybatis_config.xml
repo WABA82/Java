@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 쿼리문을 가진 xml을 연결. -->
+	<mappers>
+		<mapper resource="kr/co/sist/mapper/test_mapper.xml" />
+	</mappers>
+	<!-- 쿼리문을 가진 xml을 연결. -->
+</configuration>

@@ -1,21 +1,21 @@
 package kr.co.sist.vo;
 
 public class MemberVO {
-
-	private String name, img, loc, highSchool;
-
+	
+	private String name, img, loc, highschool;
+	
 	public MemberVO() {
 	}
-
-	public MemberVO(String name, String img, String loc, String highSchool) {
+	
+	public MemberVO(String name, String img, String loc, String highschool) {
 		this.name = name;
 		this.img = img;
 		this.loc = loc;
-		this.highSchool = highSchool;
+		this.highschool = highschool;
 	}
 
-	/* getter & setter */
-
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -40,14 +40,11 @@ public class MemberVO {
 		this.loc = loc;
 	}
 
-	public String getHighSchool() {
-		return highSchool;
+	public String getHighschool() {
+		return highschool;
 	}
 
-	public void setHighSchool(String highSchool) {
-		this.highSchool = highSchool;
-	}
-
-	/* getter & setter */
-
-}// class
+	public void setHighschool(String highschool) {
+		this.highschool = highschool;
+	} 
+}
