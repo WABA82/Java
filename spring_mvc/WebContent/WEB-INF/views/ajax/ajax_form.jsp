@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CSS 디자인 틀</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/spring_mvc/common/css/main_v20190130.css">
+<link rel="stylesheet" type="text/css" href="http://211.63.89.135/common/css/main_v20190130.css">
 <style type="text/css">
 #wrap {
 	margin: 0px auto; /* 가운데 정렬  */
@@ -20,7 +20,7 @@
 	width: 800px;
 	height: 140px;
 	background: #e5c3ef
-		url("http://localhost:8080/spring_mvc/common/images/header_bg.png");
+		url("http://211.63.89.135/common/images/header_bg.png");
 	position: relative;
 }
 
@@ -70,7 +70,7 @@
 					alert("문제가 발생했습니다." + xhr.status);
 				},
 				success : function(json_obj) {
-					var output = "<img src='http://localhost:8080/spring_mvc/common/images/img1_1.png'><br>" + decodeURI(json_obj.name) + "/" + json_obj.age +"세 ( " + decodeURI(json_obj.type) + " )";
+					var output = "<img src='http://211.63.89.135/common/images/img1_1.png'><br>" + decodeURI(json_obj.name) + "/" + json_obj.age +"세 ( " + decodeURI(json_obj.type) + " )";
 
 					$("#view").html(output);
 				}

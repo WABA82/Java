@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CSS 디자인 틀</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/jsp_prj/common/css/main_v20190130.css">
+<link rel="stylesheet" type="text/css" href="http://211.63.89.135common/css/main_v20190130.css">
 <style type="text/css">
 #wrap {
 	margin: 0px auto; /* 가운데 정렬  */
@@ -20,7 +20,7 @@
 	width: 800px;
 	height: 140px;
 	background: #e5c3ef
-		url("http://localhost:8080/jsp_prj/common/images/header_bg.png");
+		url("http://211.63.89.135common/images/header_bg.png");
 	position: relative;
 }
 

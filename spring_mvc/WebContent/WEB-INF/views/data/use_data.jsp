@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CSS 디자인 틀</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/spring_mvc/common/css/main_v20190130.css">
+<link rel="stylesheet" type="text/css" href="http://211.63.89.135/common/css/main_v20190130.css">
 <style type="text/css">
 #wrap {
 	margin: 0px auto; /* 가운데 정렬  */
@@ -20,7 +20,7 @@
 	width: 800px;
 	height: 140px;
 	background: #e5c3ef
-		url("http://localhost:8080/spring_mvc/common/images/header_bg.png");
+		url("http://211.63.89.135/common/images/header_bg.png");
 	position: relative;
 }
 
@@ -77,7 +77,7 @@
 
 		<div id="container">
 			<div>값 전달한 객체 : <c:out value="${ msg }"/></div>
-			<div style="width: 250px; height: 180px; float: right; background-image: url('http://localhost:8080/spring_mvc/common/images/postit.png;')">
+			<div style="width: 250px; height: 180px; float: right; background-image: url('http://211.63.89.135/common/images/postit.png;')">
 				<div style="margin-top: 35px; margin-left: 30px">
 					<ul>
 						<li style="text-align: center;">공지사항</li>

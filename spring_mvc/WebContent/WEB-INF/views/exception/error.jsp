@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>CSS 디자인 틀</title>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/spring_mvc/common/css/main_v20190130.css">
+<link rel="stylesheet" type="text/css" href="http://211.63.89.135/common/css/main_v20190130.css">
 
 <style type="text/css">
 #wrap {
@@ -21,7 +21,7 @@
 	width: 800px;
 	height: 140px;
 	background: #e5c3ef
-		url("http://localhost:8080/spring_mvc/common/images/header_bg.png");
+		url("http://211.63.89.135/common/images/header_bg.png");
 	position: relative;
 }
 
@@ -77,7 +77,7 @@
 		</div>
 
 		<div id="container">
-			<img alt="" src="http://localhost:8080/spring_mvc/common/images/err.png">
+			<img alt="" src="http://211.63.89.135/common/images/err.png">
 			<br>
 			문제가 발생했습니다.
 			<br>
